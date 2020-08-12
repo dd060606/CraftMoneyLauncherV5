@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
+
+<BorderPane prefHeight="710.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <HBox fx:id="topBox" prefHeight="35.0" prefWidth="200.0" stylesheets="@../css/borderpane_style.css" BorderPane.alignment="CENTER" />
+   </top>
+</BorderPane>
