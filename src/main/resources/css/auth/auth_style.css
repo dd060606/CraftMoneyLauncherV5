@@ -1,0 +1,5 @@
+#authPane {
+	-fx-background-image: url("../../images/background-image.png");
+	-fx-background-position: center;
+	-fx-background-size: cover;
+}

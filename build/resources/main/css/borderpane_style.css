@@ -1,3 +1,23 @@
 #topBox {
-    -fx-background-color: #595858;
+    -fx-background-color: #3C3C3C;
+}
+#exitButton {
+	-fx-background-color: transparent;
+	-fx-background-radius: 0px;
+}
+#exitButton:hover {
+	-fx-transition: 0.5s;
+	-fx-background-color: #E91A1A;
+	-fx-max-height: 25px;
+	-fx-border: none;
+}
+#minimizeButton {
+	-fx-background-color: transparent;
+	-fx-background-radius: 0px;
+}
+#minimizeButton:hover {
+	-fx-transition: 0.5s;
+	-fx-background-color: #0C9BEF;
+	-fx-max-height: 25px;
+	-fx-border: none;
 }
