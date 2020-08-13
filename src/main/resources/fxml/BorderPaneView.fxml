@@ -68,6 +68,14 @@
                         <Font name="Haettenschweiler" size="25.0" />
                      </font>
                   </Label>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin>
+                     <image>
+                        <Image url="@../images/logo/icon.png" />
+                     </image>
+                  </ImageView>
                </children>
             </GridPane>
          </children>

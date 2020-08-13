@@ -11,6 +11,10 @@
 	-fx-background-color: #eaeaea;
 	-fx-background-radius: 15px;
 }
+#authSelectorButton:hover, #authSelectorButton2:hover {
+	-fx-background-color: #D5D5D5;
+	-fx-background-radius: 15px;
+}
 #userField, #passwordField {
 
 	-fx-background-color: transparent;
@@ -24,4 +28,10 @@
 #loginButton {
 	-fx-background-color: #0A8AE5;
 	-fx-background-radius: 15px;
+}
+#loginButton:hover {
+    -fx-background-color: #087CCF;
+}
+#forgotPassword {
+    -fx-text-fill: #0A8AE5;
 }

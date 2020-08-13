@@ -3,15 +3,18 @@ package fr.dd06.craftmoney.launcher;
 import fr.dd06.apis.javautils.javafx.util.StageFX;
 import fr.dd06.craftmoney.CraftMoneyLauncher;
 
+import fr.dd06.craftmoney.launcher.auth.controller.AuthController;
 import fr.dd06.craftmoney.launcher.borderpane.controller.BorderPaneController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 public class LauncherStage {
     private Stage stage;
@@ -31,6 +34,8 @@ public class LauncherStage {
         stage.setWidth(1280);
         stage.setHeight(810);
         stage.initStyle(StageStyle.UNDECORATED);
+
+        stage.getIcons().add(new Image(getClass().getClassLoader().getResource("images/logo/icon.png").toString()));
 
 
         initBorderPane();
@@ -70,6 +75,9 @@ public class LauncherStage {
 
         try {
             authPane = (AnchorPane) loader.load();
+
+            AuthController controller = loader.getController();
+            controller.init();
             container.setCenter(authPane);
         } catch (IOException e) {
             e.printStackTrace();
