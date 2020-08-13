@@ -3,3 +3,7 @@
 	-fx-background-position: center;
 	-fx-background-size: cover;
 }
+#authBox {
+	-fx-background-color: rgba(52, 53, 53, 0.8);
+	-fx-background-radius: 30px;
+}

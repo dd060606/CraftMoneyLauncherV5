@@ -1,8 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane fx:id="authPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../css/auth/auth_style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-
+<AnchorPane fx:id="authPane" prefHeight="687.0" prefWidth="1280.0" stylesheets="@../../css/auth/auth_style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox fx:id="authPaneBox" alignment="CENTER" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <GridPane prefWidth="800.0">
+              <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="338.6000122070312" minHeight="10.0" prefHeight="138.60001220703123" valignment="TOP" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="594.5999740600586" minHeight="10.0" prefHeight="548.1999877929687" valignment="CENTER" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <HBox fx:id="authBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="450.0" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                     <children>
+                        <GridPane prefWidth="450.0">
+                          <columnConstraints>
+                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints maxHeight="161.59998168945313" minHeight="4.799990797042852" prefHeight="53.399993896484375" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="328.00000920295713" minHeight="0.0" prefHeight="54.799993896484374" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="427.2" minHeight="10.0" prefHeight="389.20000610351565" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label text="Connexion :" textFill="#eaeaea">
+                                 <font>
+                                    <Font name="Bauhaus 93" size="37.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </GridPane>
+                     </children></HBox>
+                  <GridPane>
+                    <columnConstraints>
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="94.20000305175782" minHeight="10.0" prefHeight="89.4" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="64.5999969482422" minHeight="10.0" prefHeight="49.400000000000006" valignment="CENTER" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <ImageView fitHeight="122.0" fitWidth="675.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER">
+                           <image>
+                              <Image url="@../../images/logo/craftmoney-title.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="70.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="50.0" fitWidth="750.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@../../images/logo/auth/auth-title.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </GridPane>
+               </children>
+            </GridPane>
+         </children>
+      </HBox>
+   </children>
 </AnchorPane>

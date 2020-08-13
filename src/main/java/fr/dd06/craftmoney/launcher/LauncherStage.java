@@ -29,7 +29,7 @@ public class LauncherStage {
         stage.setTitle("CraftMoney Launcher V5");
         stage.setResizable(false);
         stage.setWidth(1280);
-        stage.setHeight(710);
+        stage.setHeight(810);
         stage.initStyle(StageStyle.UNDECORATED);
 
 
