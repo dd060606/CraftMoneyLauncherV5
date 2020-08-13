@@ -11,12 +11,16 @@
 	-fx-background-color: #eaeaea;
 	-fx-background-radius: 15px;
 }
-#userField, #passwordField {
+#authSelectorButton:hover, #authSelectorButton2:hover {
+	-fx-background-color: #D5D5D5;
+	-fx-background-radius: 15px;
+}
+#emailField, #passwordField {
 
 	-fx-background-color: transparent;
 	-fx-text-fill: #eaeaea;
 }
-#userFieldBox, #passwordFieldBox {
+#emailFieldBox, #passwordFieldBox {
 	-fx-border-color: #eaeaea ;
     -fx-border-width: 2;
    	-fx-border-radius: 15px;
@@ -24,4 +28,10 @@
 #loginButton {
 	-fx-background-color: #0A8AE5;
 	-fx-background-radius: 15px;
+}
+#loginButton:hover {
+    -fx-background-color: #087CCF;
+}
+#forgotPassword {
+    -fx-text-fill: #0A8AE5;
 }

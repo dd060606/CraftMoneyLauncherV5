@@ -1,8 +1,10 @@
 package fr.dd06.craftmoney.launcher;
 
 import fr.dd06.apis.javautils.javafx.util.StageFX;
+import fr.dd06.apis.mcauth.AuthenticationException;
 import fr.dd06.craftmoney.CraftMoneyLauncher;
 
+import fr.dd06.craftmoney.launcher.auth.Authentication;
 import fr.dd06.craftmoney.launcher.auth.controller.AuthController;
 import fr.dd06.craftmoney.launcher.borderpane.controller.BorderPaneController;
 import javafx.fxml.FXMLLoader;
@@ -20,10 +22,11 @@ public class LauncherStage {
     private Stage stage;
     private BorderPane container;
     private AnchorPane authPane;
+    private CraftMoneyLauncher main;
 
-    public LauncherStage(Stage stage) {
+    public LauncherStage(Stage stage, CraftMoneyLauncher main) {
         this.stage = stage;
-
+        this.main = main;
         initStage();
 
     }
@@ -69,19 +72,53 @@ public class LauncherStage {
     }
 
     private void initAuthPane() {
-
+        main.getAccountDataConfig().reloadConfiguration();
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getClassLoader().getResource("fxml/auth/AuthPaneView.fxml"));
+        if(main.getAccountDataConfig().getConfiguration().get("token") != null) {
 
-        try {
-            authPane = (AnchorPane) loader.load();
+            loader.setLocation(getClass().getClassLoader().getResource("fxml/auth/AutoAuthPaneView.fxml"));
+            try {
+                authPane = (AnchorPane) loader.load();
 
-            AuthController controller = loader.getController();
-            controller.init();
-            container.setCenter(authPane);
-        } catch (IOException e) {
-            e.printStackTrace();
+
+                container.setCenter(authPane);
+
+                try {
+                    Authentication.authWithMojang(main.getAccountDataConfig().getConfiguration().get("token").toString());
+                } catch (AuthenticationException e) {
+
+                    loader.setLocation(getClass().getClassLoader().getResource("fxml/auth/AuthPaneView.fxml"));
+                    try {
+                        authPane = (AnchorPane) loader.load();
+
+                        AuthController controller = loader.getController();
+                        controller.init();
+                        container.setCenter(authPane);
+                    } catch (IOException e1) {
+                        e.printStackTrace();
+                    }
+
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+        else {
+            loader.setLocation(getClass().getClassLoader().getResource("fxml/auth/AuthPaneView.fxml"));
+            try {
+                authPane = (AnchorPane) loader.load();
+
+                AuthController controller = loader.getController();
+                controller.init();
+                container.setCenter(authPane);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+
+
 
 
     }

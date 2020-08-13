@@ -1,9 +1,16 @@
 package fr.dd06.craftmoney.launcher.auth.controller;
 
+import fr.dd06.apis.mcauth.AuthenticationException;
+import fr.dd06.craftmoney.launcher.auth.Authentication;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+
 
 import java.awt.*;
 import java.io.IOException;
@@ -18,7 +25,17 @@ public class AuthController {
     private HBox authSelectorButton2;
 
     @FXML
+    private TextField emailField;
+    @FXML
+    private PasswordField passwordField;
+    @FXML
     private Label forgotPassword;
+    @FXML
+    private Label authErrorLabel;
+    @FXML
+    private Button loginButton;
+    @FXML
+    private CheckBox rememberMe;
 
 
     private boolean mojangAuth = true;
@@ -83,18 +100,42 @@ public class AuthController {
 
     @FXML
     private void login() {
+
+
         if(mojangAuth) {
+            authErrorLabel.setText("");
+            loginButton.setText("Connexion ...");
             authWithMojang();
+
         }
         else {
+            authErrorLabel.setText("");
+            loginButton.setText("Connexion ...");
             authWithCraftMoney();
+
         }
+
     }
 
     private void authWithMojang() {
 
+        try {
+            Authentication.authWithMojang(emailField.getText(), passwordField.getText());
+        } catch (AuthenticationException e) {
+            authErrorLabel.setText("Connexion impossible : Adresse E-mail ou mot de passe incorrect !");
+            loginButton.setText("Connexion");
+            Authentication.getAccount().disconnect();
+            return;
+        }
+        authErrorLabel.setText("");
+        loginButton.setText("Connected");
+        loginButton.setDisable(true);
+        if(rememberMe.isSelected()) {
+            
+        }
+
     }
     private void authWithCraftMoney() {
-
+        Authentication.authWithCraftMoney(emailField.getText(), passwordField.getText());
     }
 }

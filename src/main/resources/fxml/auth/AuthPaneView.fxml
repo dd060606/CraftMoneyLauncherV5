@@ -5,6 +5,7 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -100,7 +101,8 @@
                                 <rowConstraints>
                                   <RowConstraints maxHeight="125.0" minHeight="10.0" prefHeight="110.0" valignment="CENTER" vgrow="SOMETIMES" />
                                   <RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="90.0" vgrow="SOMETIMES" />
-                                  <RowConstraints maxHeight="75.0" minHeight="7.0" prefHeight="29.0" vgrow="SOMETIMES" />
+                                  <RowConstraints maxHeight="75.0" minHeight="7.0" prefHeight="52.59996337890624" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="75.0" minHeight="10.0" prefHeight="24.60003662109375" vgrow="SOMETIMES" />
                                     <RowConstraints maxHeight="98.0" minHeight="10.0" prefHeight="89.0" vgrow="SOMETIMES" />
                                     <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
@@ -117,13 +119,13 @@
                                         <RowConstraints maxHeight="40.000006103515624" minHeight="10.0" prefHeight="19.0" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
-                                          <Label text="Utilisateur :" textFill="#eaeaea">
+                                          <Label text="Adresse E-mail :" textFill="#eaeaea">
                                              <font>
                                                 <Font name="Arial Black" size="18.0" />
                                              </font></Label>
-                                          <HBox fx:id="userFieldBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="300.0" GridPane.rowIndex="1">
+                                          <HBox fx:id="emailFieldBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="300.0" GridPane.rowIndex="1">
                                              <children>
-                                                <TextField fx:id="userField" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="295.0" promptText="Utilisateur" />
+                                                <TextField fx:id="emailField" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="295.0" promptText="Adresse E-mail" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -144,22 +146,27 @@
                                           </Label>
                                           <HBox fx:id="passwordFieldBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="300.0" GridPane.rowIndex="1">
                                              <children>
-                                                <TextField fx:id="passwordField" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="295.0" promptText="Mot de passe" />
+                                                <PasswordField fx:id="passwordField" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="295.0" promptText="Mot de passe" />
                                              </children>
                                           </HBox>
                                        </children>
                                     </GridPane>
-                                    <CheckBox mnemonicParsing="false" text="Se souvenir de moi" textFill="#eaeaea" GridPane.rowIndex="2">
+                                    <CheckBox fx:id="rememberMe" mnemonicParsing="false" text="Se souvenir de moi" textFill="#eaeaea" GridPane.rowIndex="2">
                                        <font>
                                           <Font name="System Bold" size="16.0" />
                                        </font>
                                     </CheckBox>
-                                    <Button fx:id="loginButton" mnemonicParsing="false" onAction="#login" prefHeight="60.0" prefWidth="250.0" text="Connexion" textFill="#eaeaea" GridPane.rowIndex="3">
+                                    <Button fx:id="loginButton" mnemonicParsing="false" onAction="#login" prefHeight="60.0" prefWidth="250.0" text="Connexion" textFill="#eaeaea" GridPane.rowIndex="4">
                                        <font>
                                           <Font name="Arial Black" size="22.0" />
                                        </font>
                                     </Button>
-                                    <Hyperlink onAction="#forgotPassword" text="Mot de passe oublié ?" textFill="#1171e5" underline="true" GridPane.rowIndex="4">
+                                    <Label fx:id="authErrorLabel" textFill="#cd2222" GridPane.rowIndex="3">
+                                       <font>
+                                          <Font name="Arial Black" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Hyperlink onAction="#forgotPassword" text="Mot de passe oublié ?" textFill="#1171e5" underline="true" GridPane.rowIndex="5">
                                        <font>
                                           <Font size="16.0" />
                                        </font>
