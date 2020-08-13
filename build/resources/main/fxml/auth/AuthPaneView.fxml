@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -11,7 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="authPane" prefHeight="687.0" prefWidth="1280.0" stylesheets="@../../css/auth/auth_style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="authPane" prefHeight="787.0" prefWidth="1280.0" stylesheets="@../../css/auth/auth_style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox fx:id="authPaneBox" alignment="CENTER" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -20,11 +24,11 @@
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints maxHeight="338.6000122070312" minHeight="10.0" prefHeight="138.60001220703123" valignment="TOP" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="594.5999740600586" minHeight="10.0" prefHeight="548.1999877929687" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="338.6000122070312" minHeight="10.0" prefHeight="152.00001220703126" valignment="TOP" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="635.1999877929688" minHeight="10.0" prefHeight="635.1999877929688" valignment="CENTER" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <HBox fx:id="authBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="450.0" GridPane.rowIndex="1">
+                  <HBox fx:id="authBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="450.0" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets />
                      </GridPane.margin>
@@ -44,10 +48,128 @@
                                     <Font name="Bauhaus 93" size="37.0" />
                                  </font>
                               </Label>
+                              <GridPane GridPane.rowIndex="1">
+                                <columnConstraints>
+                                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <HBox fx:id="authSelectorButton" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="150.0">
+                                       <children>
+                                          <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                             <HBox.margin>
+                                                <Insets left="20.0" />
+                                             </HBox.margin>
+                                             <image>
+                                                <Image url="@../../images/logo/auth/mojang-logo.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Label alignment="CENTER" text=" MOJANG">
+                                             <font>
+                                                <Font name="Arial Black" size="12.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <HBox fx:id="authSelectorButton2" alignment="CENTER_LEFT" layoutX="48.0" layoutY="28.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="150.0" GridPane.columnIndex="1">
+                                       <children>
+                                          <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                             <HBox.margin>
+                                                <Insets left="10.0" />
+                                             </HBox.margin>
+                                             <image>
+                                                <Image url="@../../images/logo/icon.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Label alignment="CENTER" text=" CRAFTMONEY">
+                                             <font>
+                                                <Font name="Arial Black" size="12.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </GridPane>
+                              <GridPane prefHeight="362.0" prefWidth="450.0" GridPane.rowIndex="2">
+                                <columnConstraints>
+                                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints maxHeight="125.0" minHeight="10.0" prefHeight="110.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                  <RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="90.0" vgrow="SOMETIMES" />
+                                  <RowConstraints maxHeight="75.0" minHeight="7.0" prefHeight="29.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="98.0" minHeight="10.0" prefHeight="89.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <GridPane.margin>
+                                    <Insets top="50.0" />
+                                 </GridPane.margin>
+                                 <children>
+                                    <Hyperlink text="Mot de passe oublié ?" GridPane.rowIndex="4">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Hyperlink>
+                                    <GridPane>
+                                      <columnConstraints>
+                                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints maxHeight="48.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="40.000006103515624" minHeight="10.0" prefHeight="19.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <Label text="Utilisateur :" textFill="#eaeaea">
+                                             <font>
+                                                <Font name="Arial Black" size="18.0" />
+                                             </font></Label>
+                                          <HBox fx:id="userFieldBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="300.0" GridPane.rowIndex="1">
+                                             <children>
+                                                <TextField fx:id="userField" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="295.0" promptText="Utilisateur" />
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </GridPane>
+                                    <GridPane layoutX="10.0" layoutY="10.0" GridPane.rowIndex="1">
+                                       <columnConstraints>
+                                          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints maxHeight="43.0" minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="40.000006103515624" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <children>
+                                          <Label text="Mot de passe :" textFill="#eaeaea">
+                                             <font>
+                                                <Font name="Arial Black" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <HBox fx:id="passwordFieldBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="300.0" GridPane.rowIndex="1">
+                                             <children>
+                                                <TextField fx:id="passwordField" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="295.0" promptText="Mot de passe" />
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </GridPane>
+                                    <CheckBox mnemonicParsing="false" text="Se souvenir de moi" textFill="#eaeaea" GridPane.rowIndex="2">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </CheckBox>
+                                    <Button fx:id="loginButton" mnemonicParsing="false" prefHeight="60.0" prefWidth="250.0" text="Connexion" textFill="#eaeaea" GridPane.rowIndex="3">
+                                       <font>
+                                          <Font name="Arial Black" size="22.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </GridPane>
                            </children>
                         </GridPane>
                      </children></HBox>
-                  <GridPane>
+                  <GridPane prefHeight="174.0" prefWidth="800.0">
                     <columnConstraints>
                       <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>

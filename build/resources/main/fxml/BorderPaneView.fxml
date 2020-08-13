@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="710.0" prefWidth="1280.0" stylesheets="@../css/borderpane_style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.dd06.craftmoney.launcher.borderpane.controller.BorderPaneController">
+<BorderPane prefHeight="810.0" prefWidth="1280.0" stylesheets="@../css/borderpane_style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.dd06.craftmoney.launcher.borderpane.controller.BorderPaneController">
    <top>
       <HBox fx:id="topBox" prefHeight="33.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
