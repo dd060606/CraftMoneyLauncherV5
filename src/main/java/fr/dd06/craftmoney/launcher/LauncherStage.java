@@ -7,6 +7,7 @@ import fr.dd06.craftmoney.CraftMoneyLauncher;
 import fr.dd06.craftmoney.launcher.auth.Authentication;
 import fr.dd06.craftmoney.launcher.auth.controller.AuthController;
 import fr.dd06.craftmoney.launcher.borderpane.controller.BorderPaneController;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -82,26 +83,44 @@ public class LauncherStage {
 
 
                 container.setCenter(authPane);
+                    Thread thread = new Thread(() -> {
+                        try {
 
-                try {
-                    Authentication.authWithMojang(main.getAccountDataConfig().getConfiguration().get("token").toString(), main);
-                } catch (AuthenticationException e) {
-                    FXMLLoader loader2 = new FXMLLoader();
-                    loader2.setLocation(getClass().getClassLoader().getResource("fxml/auth/AuthPaneView.fxml"));
+                            Authentication.authWithMojang(main.getAccountDataConfig().getConfiguration().get("token").toString(), main);
+                        } catch (AuthenticationException e) {
 
-                    authPane = (AnchorPane) loader2.load();
+                            FXMLLoader loader2 = new FXMLLoader();
+                            loader2.setLocation(getClass().getClassLoader().getResource("fxml/auth/AuthPaneView.fxml"));
 
-                    AuthController controller = loader2.getController();
-                    controller.init(main);
-                    container.setCenter(authPane);
-                    main.getAccountDataConfig().getConfiguration().put("token", "failed");
-                    main.getAccountDataConfig().saveConfiguration();
-                    System.out.println("Invalid token!");
-                    return;
+                            try {
+                                authPane = (AnchorPane) loader2.load();
+                            } catch (IOException ioException) {
+                                ioException.printStackTrace();
+                            }
+
+                            AuthController controller = loader2.getController();
+                            controller.init(main);
+                            Platform.runLater(() -> {
+                                container.setCenter(authPane);
+                            });
+
+                            main.getAccountDataConfig().getConfiguration().put("token", "failed");
+                            main.getAccountDataConfig().saveConfiguration();
+                            System.out.println("Invalid token!");
 
 
-                }
-                System.out.println("Connecté");
+
+                        }
+                        Platform.runLater(() -> {
+                            if(Authentication.getAccount().getUUID() != null) {
+                                System.out.println("Connecté en tant que " + Authentication.getAccount().getUsername());
+                            }
+                        });
+
+                    });
+                    thread.start();
+
+
             } catch (IOException e) {
                 e.printStackTrace();
             }

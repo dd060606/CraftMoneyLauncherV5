@@ -3,6 +3,7 @@ package fr.dd06.craftmoney.launcher.auth.controller;
 import fr.dd06.apis.mcauth.AuthenticationException;
 import fr.dd06.craftmoney.CraftMoneyLauncher;
 import fr.dd06.craftmoney.launcher.auth.Authentication;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -42,7 +43,7 @@ public class AuthController {
     private boolean mojangAuth = true;
     private CraftMoneyLauncher main;
 
-    private void selectMojangAuth()  {
+    private void selectMojangAuth() {
         authSelectorButton.setStyle("-fx-border-color: #0C85E7 ;" +
                 "-fx-border-width: 2;" +
                 "-fx-border-radius: 15px;");
@@ -52,7 +53,7 @@ public class AuthController {
         mojangAuth = true;
     }
 
-    private void selectCraftMoneyAuth()  {
+    private void selectCraftMoneyAuth() {
         authSelectorButton2.setStyle("-fx-border-color: #0C85E7 ;" +
                 "-fx-border-width: 2;" +
                 "-fx-border-radius: 15px;");
@@ -64,14 +65,13 @@ public class AuthController {
 
     @FXML
     private void forgotPassword() {
-        if(mojangAuth) {
+        if (mojangAuth) {
             try {
                 Desktop.getDesktop().browse(new URL("https://www.minecraft.net/fr-fr/password/forgot/").toURI());
             } catch (IOException | URISyntaxException e) {
                 e.printStackTrace();
             }
-        }
-        else {
+        } else {
             try {
                 Desktop.getDesktop().browse(new URL("https://craftmoney.fr/password/forgot").toURI());
             } catch (IOException | URISyntaxException e) {
@@ -106,49 +106,81 @@ public class AuthController {
     @FXML
     private void login() {
 
+        disableFields(true);
+        if (mojangAuth) {
 
-        if(mojangAuth) {
-            authErrorLabel.setText("");
-            loginButton.setText("Connexion ...");
+
             authWithMojang();
 
-        }
-        else {
-            authErrorLabel.setText("");
-            loginButton.setText("Connexion ...");
+        } else {
+
+
             authWithCraftMoney();
 
         }
 
     }
 
-    private void authWithMojang() {
+    private void disableFields(boolean enabled) {
+        if (enabled) {
+            loginButton.setDisable(true);
+            emailField.setDisable(true);
+            passwordField.setDisable(true);
+            rememberMe.setDisable(true);
+        } else {
+            loginButton.setDisable(false);
+            emailField.setDisable(false);
+            passwordField.setDisable(false);
+            rememberMe.setDisable(false);
+        }
+    }
 
-        try {
-            Authentication.authWithMojang(emailField.getText(), passwordField.getText());
-        } catch (AuthenticationException e) {
-            authErrorLabel.setText("Connexion impossible : Adresse E-mail ou mot de passe incorrect !");
-            loginButton.setText("Connexion");
-            Authentication.getAccount().disconnect();
-            return;
-        }
+    private void authWithMojang() {
         authErrorLabel.setText("");
-        loginButton.setText("Connected");
-        loginButton.setDisable(true);
-        if(rememberMe.isSelected()) {
-            main.getAccountDataConfig().reloadConfiguration();
-            main.getAccountDataConfig().getConfiguration().put("token", Authentication.getAccount().getAccessToken());
-            main.getAccountDataConfig().saveConfiguration();
-        }
-        else {
-            main.getAccountDataConfig().reloadConfiguration();
-            if(main.getAccountDataConfig().getConfiguration().get("token") != null) {
-                main.getAccountDataConfig().getConfiguration().put("token", "failed");
-                main.getAccountDataConfig().saveConfiguration();
+        loginButton.setText("Connexion ...");
+
+
+        Thread thread = new Thread(() -> {
+            try {
+
+                Authentication.authWithMojang(emailField.getText(), passwordField.getText());
+            } catch (AuthenticationException e) {
+                Platform.runLater(() -> {
+                    authErrorLabel.setText("Connexion impossible : Adresse E-mail ou mot de passe incorrect !");
+                    loginButton.setText("Connexion");
+                });
+
+                Authentication.getAccount().disconnect();
+                disableFields(false);
             }
-        }
+            Platform.runLater(() -> {
+                if (Authentication.getAccount().getUUID() != null) {
+                    disableFields(true);
+                    authErrorLabel.setText("");
+                    loginButton.setText("Connected");
+
+                    if (rememberMe.isSelected()) {
+                        main.getAccountDataConfig().reloadConfiguration();
+                        main.getAccountDataConfig().getConfiguration().put("token", Authentication.getAccount().getAccessToken());
+                        main.getAccountDataConfig().saveConfiguration();
+                    } else {
+                        main.getAccountDataConfig().reloadConfiguration();
+                        if (main.getAccountDataConfig().getConfiguration().get("token") != null) {
+                            main.getAccountDataConfig().getConfiguration().put("token", "failed");
+                            main.getAccountDataConfig().saveConfiguration();
+                        }
+                    }
+                }
+            });
+
+        });
+
+        thread.start();
+
+
 
     }
+
     private void authWithCraftMoney() {
         Authentication.authWithCraftMoney(emailField.getText(), passwordField.getText());
     }
