@@ -1,0 +1,51 @@
+#launcherPane {
+	-fx-background-image: url("../../images/launcher-background-image.png");
+	-fx-background-position: center;
+	-fx-background-size: cover;
+}
+#accountBox {
+	-fx-background-color: rgba(201, 207, 201, 0.6);
+	-fx-background-radius: 10px;
+}
+#logoutButton {
+	-fx-background-color: transparent;
+}
+#logoutButton:hover {
+	-fx-text-fill: #C32323;
+
+}
+#playBox {
+	-fx-background-color: rgba(0, 0, 0, 0.5);
+	-fx-background-radius: 15px;
+}
+#playButton {
+	-fx-background-color: #29D816;
+	-fx-background-radius: 30px;
+}
+#playButton:hover {
+	-fx-background-color: #25B615;
+}
+#settingsButton {
+	-fx-background-color: #29D816;
+	-fx-background-radius: 15px;
+}
+#settingsButton:hover {
+	-fx-background-color: #25B615;
+}
+#modsButton {
+	-fx-background-color: #29D816;
+	-fx-background-radius: 30px;
+}
+#modsButton:hover {
+	-fx-background-color: #25B615;
+}
+#webButton, #discordButton, #youtubeButton {
+	-fx-background-color: transparent;
+	-fx-background-radius: 15px;
+}
+#webButton:hover, #discordButton:hover, #youtubeButton:hover {
+	-fx-background-color: rgba(255, 255, 255, 0.2);
+
+}
+
+

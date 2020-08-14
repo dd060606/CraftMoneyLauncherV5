@@ -7,6 +7,7 @@ import fr.dd06.craftmoney.CraftMoneyLauncher;
 import fr.dd06.craftmoney.launcher.auth.Authentication;
 import fr.dd06.craftmoney.launcher.auth.controller.AuthController;
 import fr.dd06.craftmoney.launcher.borderpane.controller.BorderPaneController;
+import fr.dd06.craftmoney.launcher.home.controller.LauncherController;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -17,12 +18,11 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 
 public class LauncherStage {
     private Stage stage;
     private BorderPane container;
-    private AnchorPane authPane;
+    private AnchorPane anchorPane;
     private CraftMoneyLauncher main;
 
     public LauncherStage(Stage stage, CraftMoneyLauncher main) {
@@ -76,13 +76,24 @@ public class LauncherStage {
         main.getAccountDataConfig().reloadConfiguration();
         FXMLLoader loader = new FXMLLoader();
         if (main.getAccountDataConfig().getConfiguration().get("token") != null) {
+            if (main.getAccountDataConfig().getConfiguration().get("token").toString().equals("failed")) {
+                loader.setLocation(getClass().getClassLoader().getResource("fxml/auth/AuthPaneView.fxml"));
+                try {
+                    anchorPane = (AnchorPane) loader.load();
 
-            loader.setLocation(getClass().getClassLoader().getResource("fxml/auth/AutoAuthPaneView.fxml"));
-            try {
-                authPane = (AnchorPane) loader.load();
+                    AuthController controller = loader.getController();
+                    controller.init(main, this);
+                    container.setCenter(anchorPane);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                loader.setLocation(getClass().getClassLoader().getResource("fxml/auth/AutoAuthPaneView.fxml"));
+                try {
+                    anchorPane = (AnchorPane) loader.load();
 
 
-                container.setCenter(authPane);
+                    container.setCenter(anchorPane);
                     Thread thread = new Thread(() -> {
                         try {
 
@@ -93,15 +104,15 @@ public class LauncherStage {
                             loader2.setLocation(getClass().getClassLoader().getResource("fxml/auth/AuthPaneView.fxml"));
 
                             try {
-                                authPane = (AnchorPane) loader2.load();
+                                anchorPane = (AnchorPane) loader2.load();
                             } catch (IOException ioException) {
                                 ioException.printStackTrace();
                             }
 
                             AuthController controller = loader2.getController();
-                            controller.init(main);
+                            controller.init(main, this);
                             Platform.runLater(() -> {
-                                container.setCenter(authPane);
+                                container.setCenter(anchorPane);
                             });
 
                             main.getAccountDataConfig().getConfiguration().put("token", "failed");
@@ -109,11 +120,23 @@ public class LauncherStage {
                             System.out.println("Invalid token!");
 
 
-
                         }
                         Platform.runLater(() -> {
-                            if(Authentication.getAccount().getUUID() != null) {
+                            if (Authentication.getAccount().getUUID() != null) {
+
                                 System.out.println("Connecté en tant que " + Authentication.getAccount().getUsername());
+                                FXMLLoader loader3 = new FXMLLoader();
+                                loader3.setLocation(getClass().getClassLoader().getResource("fxml/launcher/LauncherPaneView.fxml"));
+                                try {
+                                    anchorPane = (AnchorPane) loader3.load();
+                                } catch (IOException ioException) {
+                                    ioException.printStackTrace();
+                                }
+
+                                LauncherController controller = loader3.getController();
+                                controller.init(main, this);
+                                container.setCenter(anchorPane);
+
                             }
                         });
 
@@ -121,17 +144,19 @@ public class LauncherStage {
                     thread.start();
 
 
-            } catch (IOException e) {
-                e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
+
         } else {
             loader.setLocation(getClass().getClassLoader().getResource("fxml/auth/AuthPaneView.fxml"));
             try {
-                authPane = (AnchorPane) loader.load();
+                anchorPane = (AnchorPane) loader.load();
 
                 AuthController controller = loader.getController();
-                controller.init(main);
-                container.setCenter(authPane);
+                controller.init(main, this);
+                container.setCenter(anchorPane);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -143,5 +168,14 @@ public class LauncherStage {
 
     public Stage getStage() {
         return stage;
+    }
+    public AnchorPane getAnchorPane() {
+        return anchorPane;
+    }
+    public void setAnchorPane(AnchorPane pane) {
+        this.anchorPane = pane;
+    }
+    public BorderPane getContainer() {
+        return container;
     }
 }

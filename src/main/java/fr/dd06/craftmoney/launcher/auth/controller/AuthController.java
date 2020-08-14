@@ -2,15 +2,19 @@ package fr.dd06.craftmoney.launcher.auth.controller;
 
 import fr.dd06.apis.mcauth.AuthenticationException;
 import fr.dd06.craftmoney.CraftMoneyLauncher;
+import fr.dd06.craftmoney.launcher.LauncherStage;
 import fr.dd06.craftmoney.launcher.auth.Authentication;
+import fr.dd06.craftmoney.launcher.home.controller.LauncherController;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 
 
@@ -42,6 +46,7 @@ public class AuthController {
 
     private boolean mojangAuth = true;
     private CraftMoneyLauncher main;
+    private LauncherStage stage;
 
     private void selectMojangAuth() {
         authSelectorButton.setStyle("-fx-border-color: #0C85E7 ;" +
@@ -80,9 +85,10 @@ public class AuthController {
         }
     }
 
-    public void init(CraftMoneyLauncher main) {
+    public void init(CraftMoneyLauncher main, LauncherStage stage) {
 
         this.main = main;
+        this.stage = stage;
 
 
         if (mojangAuth) {
@@ -170,6 +176,19 @@ public class AuthController {
                             main.getAccountDataConfig().saveConfiguration();
                         }
                     }
+
+                    FXMLLoader loader3 = new FXMLLoader();
+                    loader3.setLocation(getClass().getClassLoader().getResource("fxml/launcher/LauncherPaneView.fxml"));
+                    try {
+                        stage.setAnchorPane((AnchorPane) loader3.load());
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+
+                    LauncherController controller = loader3.getController();
+                    controller.init(main, stage);
+                    stage.getContainer().setCenter(stage.getAnchorPane());
+
                 }
             });
 
