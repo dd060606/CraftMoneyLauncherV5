@@ -74,7 +74,7 @@ public class LauncherStage {
     private void initAuthPane() {
         main.getAccountDataConfig().reloadConfiguration();
         FXMLLoader loader = new FXMLLoader();
-        if(main.getAccountDataConfig().getConfiguration().get("token") != null) {
+        if (main.getAccountDataConfig().getConfiguration().get("token") != null) {
 
             loader.setLocation(getClass().getClassLoader().getResource("fxml/auth/AutoAuthPaneView.fxml"));
             try {
@@ -84,41 +84,39 @@ public class LauncherStage {
                 container.setCenter(authPane);
 
                 try {
-                    Authentication.authWithMojang(main.getAccountDataConfig().getConfiguration().get("token").toString());
+                    Authentication.authWithMojang(main.getAccountDataConfig().getConfiguration().get("token").toString(), main);
                 } catch (AuthenticationException e) {
+                    FXMLLoader loader2 = new FXMLLoader();
+                    loader2.setLocation(getClass().getClassLoader().getResource("fxml/auth/AuthPaneView.fxml"));
 
-                    loader.setLocation(getClass().getClassLoader().getResource("fxml/auth/AuthPaneView.fxml"));
-                    try {
-                        authPane = (AnchorPane) loader.load();
+                    authPane = (AnchorPane) loader2.load();
 
-                        AuthController controller = loader.getController();
-                        controller.init();
-                        container.setCenter(authPane);
-                    } catch (IOException e1) {
-                        e.printStackTrace();
-                    }
+                    AuthController controller = loader2.getController();
+                    controller.init(main);
+                    container.setCenter(authPane);
+                    main.getAccountDataConfig().getConfiguration().put("token", "failed");
+                    main.getAccountDataConfig().saveConfiguration();
+                    System.out.println("Invalid token!");
+                    return;
+
 
                 }
+                System.out.println("Connecté");
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
-        else {
+        } else {
             loader.setLocation(getClass().getClassLoader().getResource("fxml/auth/AuthPaneView.fxml"));
             try {
                 authPane = (AnchorPane) loader.load();
 
                 AuthController controller = loader.getController();
-                controller.init();
+                controller.init(main);
                 container.setCenter(authPane);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-
-
-
-
 
 
     }

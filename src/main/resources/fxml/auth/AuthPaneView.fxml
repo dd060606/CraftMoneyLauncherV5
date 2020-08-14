@@ -176,7 +176,7 @@
                            </children>
                         </GridPane>
                      </children></HBox>
-                  <GridPane prefHeight="174.0" prefWidth="800.0">
+                  <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="174.0" prefWidth="800.0">
                     <columnConstraints>
                       <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
@@ -185,13 +185,12 @@
                       <RowConstraints maxHeight="64.5999969482422" minHeight="10.0" prefHeight="49.400000000000006" valignment="CENTER" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <ImageView fitHeight="122.0" fitWidth="675.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER">
+                        <ImageView fitHeight="89.0" fitWidth="673.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../images/logo/craftmoney-title.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="70.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fitHeight="50.0" fitWidth="750.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                        <ImageView fitHeight="113.0" fitWidth="388.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                            <image>
                               <Image url="@../../images/logo/auth/auth-title.png" />
                            </image>

@@ -1,6 +1,7 @@
 package fr.dd06.craftmoney.launcher.auth.controller;
 
 import fr.dd06.apis.mcauth.AuthenticationException;
+import fr.dd06.craftmoney.CraftMoneyLauncher;
 import fr.dd06.craftmoney.launcher.auth.Authentication;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -39,6 +40,7 @@ public class AuthController {
 
 
     private boolean mojangAuth = true;
+    private CraftMoneyLauncher main;
 
     private void selectMojangAuth()  {
         authSelectorButton.setStyle("-fx-border-color: #0C85E7 ;" +
@@ -78,7 +80,10 @@ public class AuthController {
         }
     }
 
-    public void init() {
+    public void init(CraftMoneyLauncher main) {
+
+        this.main = main;
+
 
         if (mojangAuth) {
             selectMojangAuth();
@@ -131,7 +136,16 @@ public class AuthController {
         loginButton.setText("Connected");
         loginButton.setDisable(true);
         if(rememberMe.isSelected()) {
-            
+            main.getAccountDataConfig().reloadConfiguration();
+            main.getAccountDataConfig().getConfiguration().put("token", Authentication.getAccount().getAccessToken());
+            main.getAccountDataConfig().saveConfiguration();
+        }
+        else {
+            main.getAccountDataConfig().reloadConfiguration();
+            if(main.getAccountDataConfig().getConfiguration().get("token") != null) {
+                main.getAccountDataConfig().getConfiguration().put("token", "failed");
+                main.getAccountDataConfig().saveConfiguration();
+            }
         }
 
     }

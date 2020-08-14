@@ -9,11 +9,13 @@ import fr.dd06.apis.mcauth.model.response.AuthResponse;
 import fr.dd06.apis.mcauth.model.response.RefreshResponse;
 import fr.dd06.apis.mclauncher.minecraft.auth.Account;
 import fr.dd06.apis.mclauncher.minecraft.auth.AccountType;
+import fr.dd06.craftmoney.CraftMoneyLauncher;
 
 public class Authentication {
 
     private static final String clientToken = "@craftmoneyToken@";
     private static Account account = new Account();
+
 
 
 
@@ -26,11 +28,16 @@ public class Authentication {
         account.connect(AccountType.MOJANG_ACCOUNT, response.getSelectedProfile().getName(), response.getSelectedProfile().getId(), response.getAccessToken(), clientToken);
     }
 
-    public static void authWithMojang(String token) throws AuthenticationException {
+    public static void authWithMojang(String token, CraftMoneyLauncher main) throws AuthenticationException {
         Authenticator authenticator = new Authenticator(Authenticator.MOJANG_AUTH_URL, AuthPoints.NORMAL_AUTH_POINTS);
         RefreshResponse response = authenticator.refresh(token, clientToken);
         account.connect(AccountType.MOJANG_ACCOUNT, response.getSelectedProfile().getName(), response.getSelectedProfile().getId(),
                 response.getAccessToken(), clientToken);
+
+        main.getAccountDataConfig().reloadConfiguration();
+        main.getAccountDataConfig().getConfiguration().put("token", account.getAccessToken());
+        main.getAccountDataConfig().saveConfiguration();
+
     }
 
     public static void authWithCraftMoney(String username, String password) {
