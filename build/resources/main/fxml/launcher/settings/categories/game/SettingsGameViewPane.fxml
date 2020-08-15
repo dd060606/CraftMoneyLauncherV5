@@ -50,7 +50,7 @@
                         </Label>
                         <HBox fx:id="ramBox" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                            <children>
-                              <GridPane prefHeight="94.0" prefWidth="666.0">
+                              <GridPane fx:id="ramGridPane" prefHeight="94.0" prefWidth="666.0">
                                 <columnConstraints>
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                 </columnConstraints>
