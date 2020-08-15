@@ -1,7 +1,10 @@
 package fr.dd06.craftmoney.launcher.home.settings;
 
+import fr.dd06.apis.javautils.javafx.animation.AnimatorFX;
+import fr.dd06.apis.javautils.javafx.util.StageFX;
 import fr.dd06.craftmoney.launcher.LauncherStage;
 import fr.dd06.craftmoney.launcher.home.settings.controller.SettingsBorderPaneController;
+import fr.dd06.craftmoney.launcher.home.settings.controller.SettingsController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -24,9 +27,30 @@ public class SettingsStage extends Stage {
         initStage();
 
         initBorderPane();
+        initAnchorPane();
+        StageFX.setMovableWithBorder(this, settingsContainer, true, 50, 0, 0 , 0);
         this.show();
+        AnimatorFX.fadeInFrameFX(this, AnimatorFX.FAST);
         this.centerOnScreen();
     }
+
+    private void initAnchorPane() {
+
+        FXMLLoader loader = new FXMLLoader();
+
+        loader.setLocation(getClass().getClassLoader().getResource("fxml/launcher/settings/SettingsViewPane.fxml"));
+
+        try {
+            settingsPane = (AnchorPane) loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        SettingsController controller = loader.getController();
+        controller.init(this);
+
+        settingsContainer.setCenter(settingsPane);
+    }
+
 
     private void initBorderPane() {
 
@@ -48,7 +72,7 @@ public class SettingsStage extends Stage {
 
     private void initStage() {
         this.setTitle("CraftMoney Launcher | Paramètres");
-        this.setWidth(640);
+        this.setWidth(910);
         this.setHeight(710);
         this.setResizable(false);
         this.initStyle(StageStyle.UNDECORATED);

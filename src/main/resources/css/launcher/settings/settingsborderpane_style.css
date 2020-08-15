@@ -1,0 +1,33 @@
+#topBox {
+    -fx-background-color: #343535;
+}
+#exitButton {
+	-fx-background-color: transparent;
+	-fx-background-radius: 0px;
+}
+#exitButton:hover {
+	-fx-transition: 0.5s;
+	-fx-background-color: #E91A1A;
+	-fx-max-height: 25px;
+	-fx-border: none;
+}
+#settingsBorderPane {
+	-fx-background-image: url("../../../images/settings-background-image.png");
+	-fx-background-position: center;
+	-fx-background-size: cover;
+}
+#settingsPlayButton, #settingsLauncherButton, #settingsInfosButton {
+	-fx-background-color: transparent;
+
+    -fx-border-width: 0 0 2 0;
+    -fx-border-color: #fff;
+}
+#settingsPlayButton:hover, #settingsLauncherButton:hover, #settingsInfosButton:hover {
+	-fx-background-color: rgba(255, 255, 255, 0.3);
+}
+
+#settingsSelectBox {
+	-fx-border-style: solid solid none none;
+    -fx-border-width: 2;
+    -fx-border-color: #fff;
+}

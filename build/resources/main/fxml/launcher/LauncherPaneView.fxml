@@ -225,7 +225,7 @@
                                     <RowConstraints maxHeight="187.40000762939454" minHeight="10.0" prefHeight="98.20000762939455" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Label alignment="TOP_LEFT" contentDisplay="CENTER" prefHeight="24.0" prefWidth="150.0" text="Informations" textFill="#111111">
+                                    <Label alignment="TOP_LEFT" contentDisplay="CENTER" text="Informations" textFill="#111111">
                                        <font>
                                           <Font name="Gill Sans Ultra Bold" size="18.0" />
                                        </font>

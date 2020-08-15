@@ -49,7 +49,7 @@ public class AnimatorFX {
 		Timeline timeline = new Timeline();
 		KeyFrame key = new KeyFrame(Duration.millis(duration), new KeyValue(toFade.opacityProperty(), 0));
 		timeline.getKeyFrames().add(key);
-		timeline.setOnFinished((exit) -> System.exit(0));
+		timeline.setOnFinished((exit) -> toFade.close());
 		timeline.play();
 	}
 
