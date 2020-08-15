@@ -2,10 +2,10 @@ package fr.dd06.craftmoney.launcher.home.settings;
 
 import fr.dd06.apis.javautils.javafx.animation.AnimatorFX;
 import fr.dd06.apis.javautils.javafx.util.StageFX;
+import fr.dd06.craftmoney.CraftMoneyLauncher;
 import fr.dd06.craftmoney.launcher.LauncherStage;
 import fr.dd06.craftmoney.launcher.home.settings.controller.SettingsBorderPaneController;
-import fr.dd06.craftmoney.launcher.home.settings.controller.SettingsController;
-import javafx.fxml.FXML;
+import fr.dd06.craftmoney.launcher.home.settings.controller.categories.game.SettingsGameController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -17,13 +17,15 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 
 public class SettingsStage extends Stage {
+    private CraftMoneyLauncher main;
     private LauncherStage launcherStage;
     private AnchorPane settingsPane;
     private BorderPane settingsContainer;
 
 
-    public SettingsStage(LauncherStage launcherStage) {
+    public SettingsStage(LauncherStage launcherStage, CraftMoneyLauncher main) {
         this.launcherStage = launcherStage;
+        this.main = main;
         initStage();
 
         initBorderPane();
@@ -38,15 +40,15 @@ public class SettingsStage extends Stage {
 
         FXMLLoader loader = new FXMLLoader();
 
-        loader.setLocation(getClass().getClassLoader().getResource("fxml/launcher/settings/SettingsViewPane.fxml"));
+        loader.setLocation(getClass().getClassLoader().getResource("fxml/launcher/settings/categories/game/SettingsGameViewPane.fxml"));
 
         try {
             settingsPane = (AnchorPane) loader.load();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        SettingsController controller = loader.getController();
-        controller.init(this);
+        SettingsGameController controller = loader.getController();
+        controller.init(this, main);
 
         settingsContainer.setCenter(settingsPane);
     }

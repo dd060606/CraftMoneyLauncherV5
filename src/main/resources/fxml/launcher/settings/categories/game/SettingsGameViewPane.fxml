@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="660.0" prefWidth="665.0" stylesheets="@../../../../../css/launcher/settings/categories/game/settingsgame_style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.dd06.craftmoney.launcher.home.settings.controller.categories.game.SettingsGameController">
+   <children>
+      <HBox alignment="TOP_CENTER" layoutX="136.0" layoutY="84.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <GridPane prefHeight="400.0" prefWidth="746.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="128.60001220703126" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="266.8" minHeight="0.0" prefHeight="74.40000610351564" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="390.4" minHeight="0.0" prefHeight="136.7999938964844" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="390.4" minHeight="10.0" prefHeight="155.19997558593747" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="371.59999999999997" minHeight="10.0" prefHeight="139.19999084472659" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Jeu" textFill="#eaeaea" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+                     <font>
+                        <Font name="Impact" size="24.0" />
+                     </font>
+                  </Label>
+                  <GridPane GridPane.rowIndex="1">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="31.600010299682616" minHeight="10.0" prefHeight="18.39998779296875" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="56.80001831054687" minHeight="10.0" prefHeight="55.20001220703124" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="Allocation de mémoire vive" textFill="#eaeaea">
+                           <font>
+                              <Font name="Arial Bold Italic" size="16.0" />
+                           </font>
+                           <padding>
+                              <Insets left="50.0" />
+                           </padding>
+                        </Label>
+                        <HBox fx:id="ramBox" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+                           <children>
+                              <GridPane prefHeight="94.0" prefWidth="666.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints maxHeight="32.000008010864256" minHeight="10.0" prefHeight="22.19999198913574" vgrow="SOMETIMES" />
+                                  <RowConstraints maxHeight="34.599996948242186" minHeight="10.0" prefHeight="32.60000801086426" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Label fx:id="ramLabel" text="RAM" textFill="#eaeaea">
+                                       <padding>
+                                          <Insets left="50.0" />
+                                       </padding>
+                                       <font>
+                                          <Font name="Arial Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </HBox>
+                     </children>
+                  </GridPane>
+               </children>
+            </GridPane>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

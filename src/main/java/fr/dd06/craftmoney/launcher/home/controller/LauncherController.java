@@ -164,6 +164,6 @@ public class LauncherController {
     }
     @FXML
     private void openSettings() {
-        SettingsStage settingsStage = new SettingsStage(stage);
+        SettingsStage settingsStage = new SettingsStage(stage, main);
     }
 }
