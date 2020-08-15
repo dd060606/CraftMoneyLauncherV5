@@ -4,6 +4,7 @@ import fr.dd06.craftmoney.CraftMoneyLauncher;
 import fr.dd06.craftmoney.launcher.LauncherStage;
 import fr.dd06.craftmoney.launcher.auth.Authentication;
 import fr.dd06.craftmoney.launcher.auth.controller.AuthController;
+import fr.dd06.craftmoney.launcher.home.settings.SettingsStage;
 import javafx.animation.Animation;
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
@@ -41,14 +42,17 @@ public class LauncherController {
     private Label shopPoints;
 
     @FXML
-    private Text infoText1;
+    private Label infoText1;
     @FXML
-    private Text infoText2;
+    private Label infoText2;
     @FXML
-    private Text infoText3;
+    private Label infoText3;
     @FXML
     private Button settingsButton;
+    @FXML
+    private ImageView settingsImage;
 
+    private RotateTransition rotateSettingsImage;
 
     private CraftMoneyLauncher main;
     private LauncherStage stage;
@@ -70,15 +74,19 @@ public class LauncherController {
     }
 
     private void initEvents() {
-        settingsButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                RotateTransition rt = new RotateTransition(Duration.millis(3000), imageView);
-                rt.setByAngle(360);
-                rt.setCycleCount(Animation.INDEFINITE);
-                rt.setInterpolator(Interpolator.LINEAR);
-                rt.play();
+        settingsButton.setOnMouseEntered(event -> {
+            rotateSettingsImage = new RotateTransition(Duration.millis(3000), settingsImage);
+            rotateSettingsImage.setByAngle(360);
+            rotateSettingsImage.setCycleCount(Animation.INDEFINITE);
+            rotateSettingsImage.setInterpolator(Interpolator.LINEAR);
+            rotateSettingsImage.play();
 
+
+        });
+        settingsButton.setOnMouseExited(event -> {
+            if(rotateSettingsImage != null) {
+                rotateSettingsImage.stop();
+                settingsImage.setRotate(0);
             }
         });
     }
@@ -156,6 +164,6 @@ public class LauncherController {
     }
     @FXML
     private void openSettings() {
-
+        SettingsStage settingsStage = new SettingsStage(stage);
     }
 }

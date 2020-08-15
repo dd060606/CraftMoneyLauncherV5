@@ -11,7 +11,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <AnchorPane fx:id="launcherPane" prefHeight="787.0" prefWidth="1280.0" stylesheets="@../../css/launcher/launcher_style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.dd06.craftmoney.launcher.home.controller.LauncherController">
    <children>
@@ -121,7 +120,7 @@
                                  <children>
                                     <Button fx:id="settingsButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openSettings" prefHeight="60.0" prefWidth="60.0" GridPane.halignment="CENTER">
                                        <graphic>
-                                          <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fx:id="settingsImage" fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@../../images/logo/launcher-logo/settings-logo.png" />
                                              </image>
@@ -231,27 +230,21 @@
                                           <Font name="Gill Sans Ultra Bold" size="18.0" />
                                        </font>
                                     </Label>
-                                    <Text fx:id="infoText1" strokeType="OUTSIDE" strokeWidth="0.0" text="Aucune informations à afficher" GridPane.rowIndex="1">
+                                    <Label fx:id="infoText1" text="Aucune informations à afficher" textFill="#111111" GridPane.rowIndex="1">
                                        <font>
-                                          <Font name="System Bold Italic" size="14.0" />
+                                          <Font name="Gill Sans Ultra Bold" size="12.0" />
                                        </font>
-                                    </Text>
-                                    <Text fx:id="infoText2" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="2">
-                                       <GridPane.margin>
-                                          <Insets />
-                                       </GridPane.margin>
+                                    </Label>
+                                    <Label fx:id="infoText2" textFill="#111111" GridPane.rowIndex="2">
                                        <font>
-                                          <Font name="System Bold Italic" size="14.0" />
+                                          <Font name="Gill Sans Ultra Bold" size="12.0" />
                                        </font>
-                                    </Text>
-                                    <Text fx:id="infoText3" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="3" GridPane.valignment="TOP">
+                                    </Label>
+                                    <Label fx:id="infoText3" textFill="#111111" GridPane.rowIndex="3" GridPane.valignment="TOP">
                                        <font>
-                                          <Font name="System Bold Italic" size="14.0" />
+                                          <Font name="Gill Sans Ultra Bold" size="12.0" />
                                        </font>
-                                       <GridPane.margin>
-                                          <Insets top="7.0" />
-                                       </GridPane.margin>
-                                    </Text>
+                                    </Label>
                                  </children>
                               </GridPane>
                            </children>
