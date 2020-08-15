@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane fx:id="launcherPane" prefHeight="787.0" prefWidth="1280.0" stylesheets="@../../css/launcher/launcher_style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.dd06.craftmoney.launcher.home.controller.LauncherController">
    <children>
@@ -97,20 +98,53 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Button fx:id="playButton" mnemonicParsing="false" onAction="#play" prefHeight="100.0" prefWidth="300.0" text="JOUER" textFill="#eaeaea" GridPane.halignment="CENTER">
+                              <Button fx:id="playButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#play" prefHeight="100.0" prefWidth="300.0" textFill="#eaeaea" GridPane.halignment="CENTER">
                                  <font>
                                     <Font name="Tw Cen MT Condensed Extra Bold" size="48.0" />
                                  </font>
-                              </Button>
-                              <Button fx:id="settingsButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                                  <graphic>
-                                    <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="128.0" fitWidth="362.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../../images/logo/settings-logo.png" />
+                                          <Image url="@../../images/logo/launcher-logo/play-logo.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
                               </Button>
+                              <GridPane GridPane.columnIndex="1">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints maxHeight="171.59998168945313" minHeight="10.0" prefHeight="128.80001831054688" vgrow="SOMETIMES" />
+                                  <RowConstraints maxHeight="95.60001220703126" minHeight="10.0" prefHeight="71.19998168945312" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Button fx:id="settingsButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openSettings" prefHeight="60.0" prefWidth="60.0" GridPane.halignment="CENTER">
+                                       <graphic>
+                                          <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../images/logo/launcher-logo/settings-logo.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <Button fx:id="modsButton" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#openModsMenu" prefHeight="35.0" prefWidth="150.0" text="MODS" textFill="#eaeaea" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                       <font>
+                                          <Font name="Tw Cen MT Condensed Extra Bold" size="18.0" />
+                                       </font>
+                                       <GridPane.margin>
+                                          <Insets />
+                                       </GridPane.margin>
+                                       <graphic>
+                                          <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true">
+                                             <image>
+                                                <Image url="@../../images/logo/launcher-logo/download-logo.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </GridPane>
                            </children>
                         </GridPane>
                      </children>
@@ -136,38 +170,38 @@
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="BOTTOM" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Button fx:id="webButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" GridPane.halignment="CENTER">
+                                    <Button fx:id="webButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openCraftMoneyWebsite" prefHeight="50.0" prefWidth="50.0" GridPane.halignment="CENTER">
                                        <GridPane.margin>
                                           <Insets bottom="50.0" />
                                        </GridPane.margin>
                                        <graphic>
                                           <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../images/logo/web-logo.png" />
+                                                <Image url="@../../images/logo/launcher-logo/web-logo.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
                                     </Button>
-                                    <Button fx:id="discordButton" layoutX="91.0" layoutY="262.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                                    <Button fx:id="discordButton" layoutX="91.0" layoutY="262.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openCraftMoneyDiscord" prefHeight="50.0" prefWidth="50.0" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                                        <GridPane.margin>
                                           <Insets bottom="50.0" />
                                        </GridPane.margin>
                                        <graphic>
                                           <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../images/logo/discord-logo.png" />
+                                                <Image url="@../../images/logo/launcher-logo/discord-logo.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
                                     </Button>
-                                    <Button fx:id="youtubeButton" layoutX="304.0" layoutY="262.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+                                    <Button fx:id="youtubeButton" layoutX="304.0" layoutY="262.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openCraftMoneyYoutube" prefHeight="50.0" prefWidth="50.0" GridPane.columnIndex="2" GridPane.halignment="CENTER">
                                        <GridPane.margin>
                                           <Insets bottom="50.0" />
                                        </GridPane.margin>
                                        <graphic>
                                           <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../images/logo/youtube-logo.png" />
+                                                <Image url="@../../images/logo/launcher-logo/youtube-logo.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
@@ -176,14 +210,52 @@
                               </GridPane>
                            </children>
                         </HBox>
-                        <Button fx:id="modsButton" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" text="MODS" textFill="#eaeaea" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
-                           <font>
-                              <Font name="Tw Cen MT Condensed Extra Bold" size="18.0" />
-                           </font>
+                        <HBox fx:id="infoBox" alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                            <GridPane.margin>
-                              <Insets bottom="50.0" right="100.0" />
+                              <Insets bottom="5.0" left="50.0" right="5.0" top="50.0" />
                            </GridPane.margin>
-                        </Button>
+                           <children>
+                              <GridPane prefHeight="222.0" prefWidth="642.0">
+                                <columnConstraints>
+                                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints maxHeight="106.60001220703126" minHeight="10.0" prefHeight="67.99997367858887" valignment="TOP" vgrow="SOMETIMES" />
+                                  <RowConstraints maxHeight="187.40000762939454" minHeight="10.0" prefHeight="26.400036621093747" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="187.40000762939454" minHeight="0.0" prefHeight="30.19999237060547" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="187.40000762939454" minHeight="10.0" prefHeight="98.20000762939455" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Label alignment="TOP_LEFT" contentDisplay="CENTER" prefHeight="24.0" prefWidth="150.0" text="Informations" textFill="#111111">
+                                       <font>
+                                          <Font name="Gill Sans Ultra Bold" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Text fx:id="infoText1" strokeType="OUTSIDE" strokeWidth="0.0" text="Aucune informations à afficher" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font name="System Bold Italic" size="14.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fx:id="infoText2" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="2">
+                                       <GridPane.margin>
+                                          <Insets />
+                                       </GridPane.margin>
+                                       <font>
+                                          <Font name="System Bold Italic" size="14.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fx:id="infoText3" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="3" GridPane.valignment="TOP">
+                                       <font>
+                                          <Font name="System Bold Italic" size="14.0" />
+                                       </font>
+                                       <GridPane.margin>
+                                          <Insets top="7.0" />
+                                       </GridPane.margin>
+                                    </Text>
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </HBox>
                      </children>
                   </GridPane>
                </children>
