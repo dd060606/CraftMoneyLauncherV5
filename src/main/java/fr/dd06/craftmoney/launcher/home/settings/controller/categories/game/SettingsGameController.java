@@ -1,6 +1,7 @@
 package fr.dd06.craftmoney.launcher.home.settings.controller.categories.game;
 
 import com.jfoenix.controls.JFXSlider;
+import fr.dd06.apis.javautils.java.util.system.Memory;
 import fr.dd06.craftmoney.CraftMoneyLauncher;
 import fr.dd06.craftmoney.launcher.home.settings.SettingsStage;
 import javafx.beans.value.ChangeListener;
@@ -28,8 +29,9 @@ public class SettingsGameController {
 
 
 
-        updateRamLabel();
+
         initComponents();
+        updateRam();
         initEvents();
     }
 
@@ -47,7 +49,7 @@ public class SettingsGameController {
                     main.getLauncherSettingsConfig().getConfiguration().put("ram", 2.5);
                 }
                 main.getLauncherSettingsConfig().saveConfiguration();
-                updateRamLabel();
+                updateRam();
 
             }
         });
@@ -56,7 +58,11 @@ public class SettingsGameController {
     private void initComponents() {
 
 
-        ramSlider = new JFXSlider(0, 7, 2);
+        ramSlider = new JFXSlider();
+        ramSlider.setMin(1);
+
+        ramSlider.setMax(Memory.getInstalledMemoryInGb() - 2);
+
         ramSlider.setMaxWidth(550);
 
         ramGridPane.add(ramSlider, 0, 1);
@@ -64,13 +70,30 @@ public class SettingsGameController {
 
     }
 
-    private void updateRamLabel() {
+    private void updateRam() {
         main.getLauncherSettingsConfig().reloadConfiguration();
 
         if(main.getLauncherSettingsConfig().getConfiguration().get("ram") == null) {
-            main.getLauncherSettingsConfig().getConfiguration().put("ram", 2.5);
+            if(Memory.getInstalledMemoryInGb() < 4) {
+
+                main.getLauncherSettingsConfig().getConfiguration().put("ram", 2);
+
+            }
+            else if (Memory.getInstalledMemoryInGb() < 8) {
+
+                main.getLauncherSettingsConfig().getConfiguration().put("ram", 3.5);
+
+            }
+            else {
+
+                main.getLauncherSettingsConfig().getConfiguration().put("ram", 5);
+
+            }
+
         }
+        ramSlider.setValue(Double.parseDouble(main.getLauncherSettingsConfig().getConfiguration().get("ram").toString()));
         main.getLauncherSettingsConfig().saveConfiguration();
+
         ramLabel.setText("RAM: " + main.getLauncherSettingsConfig().getConfiguration().get("ram") + "Gb");
     }
 }
