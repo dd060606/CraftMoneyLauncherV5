@@ -3,6 +3,7 @@ package fr.dd06.craftmoney.launcher.home.settings.controller;
 import fr.dd06.apis.javautils.javafx.animation.AnimatorFX;
 import fr.dd06.craftmoney.launcher.home.settings.SettingsStage;
 import fr.dd06.craftmoney.launcher.home.settings.controller.categories.game.SettingsGameController;
+import fr.dd06.craftmoney.launcher.home.settings.controller.categories.infos.SettingsInfosController;
 import fr.dd06.craftmoney.launcher.home.settings.controller.categories.launcher.SettingsLauncherController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -53,6 +54,17 @@ public class SettingsBorderPaneController {
     }
     @FXML
     private void selectInfosSettings() {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getClassLoader().getResource("fxml/launcher/settings/categories/infos/SettingsInfosViewPane.fxml"));
 
+        try {
+            settingsStage.setSettingsAnchorPane((AnchorPane) loader.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        SettingsInfosController controller = loader.getController();
+
+
+        settingsStage.getSettingsContainer().setCenter(settingsStage.getSettingsAnchorPane());
     }
 }
