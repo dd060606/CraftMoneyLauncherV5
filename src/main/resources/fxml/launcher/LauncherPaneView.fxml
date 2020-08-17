@@ -108,6 +108,9 @@
                                        </image>
                                     </ImageView>
                                  </graphic>
+                                 <GridPane.margin>
+                                    <Insets left="20.0" />
+                                 </GridPane.margin>
                               </Button>
                               <GridPane GridPane.columnIndex="1">
                                 <columnConstraints>
@@ -144,6 +147,14 @@
                                     </Button>
                                  </children>
                               </GridPane>
+                              <ImageView fitHeight="150.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
+                                 <GridPane.margin>
+                                    <Insets left="15.0" />
+                                 </GridPane.margin>
+                                 <image>
+                                    <Image url="@../../images/logo/icon.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </GridPane>
                      </children>
