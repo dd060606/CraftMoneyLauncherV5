@@ -82,4 +82,17 @@ public class SettingsStage extends Stage {
         this.initModality(Modality.WINDOW_MODAL);
     }
 
+    public BorderPane getSettingsContainer() {
+        return settingsContainer;
+    }
+    public AnchorPane getSettingsAnchorPane() {
+        return settingsPane;
+    }
+
+    public void setSettingsAnchorPane(AnchorPane ac) {
+        this.settingsPane = ac;
+    }
+    public CraftMoneyLauncher getMain() {
+        return main;
+    }
 }

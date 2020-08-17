@@ -68,17 +68,17 @@
                 <RowConstraints maxHeight="90.0" minHeight="10.0" prefHeight="90.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="settingsPlayButton" mnemonicParsing="false" prefHeight="90.0" prefWidth="297.0" text="Jeu" textFill="#eaeaea">
+                  <Button fx:id="settingsPlayButton" mnemonicParsing="false" onAction="#selectGameSettings" prefHeight="90.0" prefWidth="297.0" text="Jeu" textFill="#eaeaea">
                      <font>
                         <Font name="Impact" size="20.0" />
                      </font>
                   </Button>
-                  <Button fx:id="settingsLauncherButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="297.0" text="Launcher" textFill="#eaeaea" GridPane.rowIndex="1">
+                  <Button fx:id="settingsLauncherButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#selectLauncherSettings" prefHeight="90.0" prefWidth="297.0" text="Launcher" textFill="#eaeaea" GridPane.rowIndex="1">
                      <font>
                         <Font name="Impact" size="20.0" />
                      </font>
                   </Button>
-                  <Button fx:id="settingsInfosButton" layoutX="10.0" layoutY="100.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="297.0" text="Informations" textFill="#eaeaea" GridPane.rowIndex="2">
+                  <Button fx:id="settingsInfosButton" layoutX="10.0" layoutY="100.0" mnemonicParsing="false" onAction="#selectInfosSettings" prefHeight="90.0" prefWidth="297.0" text="Informations" textFill="#eaeaea" GridPane.rowIndex="2">
                      <font>
                         <Font name="Haettenschweiler" size="26.0" />
                      </font>

@@ -45,7 +45,7 @@ public class LauncherStage {
 
         initBorderPane();
 
-        initAuthPane();
+        initAuth();
 
         StageFX.setMovableWithBorder(stage, container, true, 70, 0, 0, 0);
         stage.show();
@@ -74,97 +74,91 @@ public class LauncherStage {
         }
     }
 
-    private void initAuthPane() {
+    private void initAuth() {
         main.getAccountDataConfig().reloadConfiguration();
+        main.getLauncherSettingsConfig().reloadConfiguration();
         FXMLLoader loader = new FXMLLoader();
-        if (main.getAccountDataConfig().getConfiguration().get("token") != null) {
+        if (main.getLauncherSettingsConfig().getConfiguration().get("autoAuth") != null && main.getAccountDataConfig().getConfiguration().get("token") != null) {
+
             if (main.getAccountDataConfig().getConfiguration().get("token").toString().equals("failed")) {
-                loader.setLocation(getClass().getClassLoader().getResource("fxml/auth/AuthPaneView.fxml"));
-                try {
-                    anchorPane = (AnchorPane) loader.load();
+                initAuthPane();
 
-                    AuthController controller = loader.getController();
-                    controller.init(main, this);
-                    container.setCenter(anchorPane);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
             } else {
-                loader.setLocation(getClass().getClassLoader().getResource("fxml/auth/AutoAuthPaneView.fxml"));
-                try {
-                    anchorPane = (AnchorPane) loader.load();
 
+                if (!Boolean.parseBoolean(main.getLauncherSettingsConfig().getConfiguration().get("autoAuth").toString())){
+                    initAuthPane();
+                } else {
+                    loader.setLocation(getClass().getClassLoader().getResource("fxml/auth/AutoAuthPaneView.fxml"));
+                    try {
+                        anchorPane = (AnchorPane) loader.load();
+                        container.setCenter(anchorPane);
 
-                    container.setCenter(anchorPane);
-                    Thread thread = new Thread(() -> {
-                        try {
-
-                            Authentication.authWithMojang(main.getAccountDataConfig().getConfiguration().get("token").toString(), main);
-                        } catch (AuthenticationException e) {
-
-                            FXMLLoader loader2 = new FXMLLoader();
-                            loader2.setLocation(getClass().getClassLoader().getResource("fxml/auth/AuthPaneView.fxml"));
-
+                        Thread thread = new Thread(() -> {
                             try {
-                                anchorPane = (AnchorPane) loader2.load();
-                            } catch (IOException ioException) {
-                                ioException.printStackTrace();
-                            }
 
-                            AuthController controller = loader2.getController();
-                            controller.init(main, this);
+                                Authentication.authWithMojang(main.getAccountDataConfig().getConfiguration().get("token").toString(), main);
+                            } catch (AuthenticationException e) {
+
+                                initAuthPane();
+                                Platform.runLater(() -> {
+                                    container.setCenter(anchorPane);
+                                });
+
+                                main.getAccountDataConfig().getConfiguration().put("token", "failed");
+                                main.getAccountDataConfig().saveConfiguration();
+                                System.out.println("Invalid token!");
+
+
+                            }
                             Platform.runLater(() -> {
-                                container.setCenter(anchorPane);
+                                if (Authentication.getAccount().getUUID() != null) {
+
+                                    System.out.println("Connecté en tant que " + Authentication.getAccount().getUsername());
+
+                                    FXMLLoader loader3 = new FXMLLoader();
+                                    loader3.setLocation(getClass().getClassLoader().getResource("fxml/launcher/LauncherPaneView.fxml"));
+                                    try {
+                                        anchorPane = (AnchorPane) loader3.load();
+                                    } catch (IOException ioException) {
+                                        ioException.printStackTrace();
+                                    }
+
+                                    LauncherController controller = loader3.getController();
+                                    controller.init(main, this);
+                                    container.setCenter(anchorPane);
+
+                                }
                             });
 
-                            main.getAccountDataConfig().getConfiguration().put("token", "failed");
-                            main.getAccountDataConfig().saveConfiguration();
-                            System.out.println("Invalid token!");
-
-
-                        }
-                        Platform.runLater(() -> {
-                            if (Authentication.getAccount().getUUID() != null) {
-
-                                System.out.println("Connecté en tant que " + Authentication.getAccount().getUsername());
-                                FXMLLoader loader3 = new FXMLLoader();
-                                loader3.setLocation(getClass().getClassLoader().getResource("fxml/launcher/LauncherPaneView.fxml"));
-                                try {
-                                    anchorPane = (AnchorPane) loader3.load();
-                                } catch (IOException ioException) {
-                                    ioException.printStackTrace();
-                                }
-
-                                LauncherController controller = loader3.getController();
-                                controller.init(main, this);
-                                container.setCenter(anchorPane);
-
-                            }
                         });
-
-                    });
-                    thread.start();
+                        thread.start();
 
 
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
 
-        } else {
-            loader.setLocation(getClass().getClassLoader().getResource("fxml/auth/AuthPaneView.fxml"));
-            try {
-                anchorPane = (AnchorPane) loader.load();
 
-                AuthController controller = loader.getController();
-                controller.init(main, this);
-                container.setCenter(anchorPane);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        } else {
+           initAuthPane();
         }
 
 
+    }
+    private void initAuthPane() {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getClassLoader().getResource("fxml/auth/AuthPaneView.fxml"));
+        try {
+            anchorPane = (AnchorPane) loader.load();
+
+            AuthController controller = loader.getController();
+            controller.init(main, this);
+            container.setCenter(anchorPane);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 

@@ -45,6 +45,11 @@ public class CraftMoneyLauncher extends Application {
         }
 
 
+        launcherSettingsConfig.reloadConfiguration();
+        launcherSettingsConfig.getConfiguration().putIfAbsent("autoAuth", false);
+        launcherSettingsConfig.getConfiguration().putIfAbsent("lowRam", false);
+
+        launcherSettingsConfig.saveConfiguration();
 
     }
 
@@ -62,4 +67,6 @@ public class CraftMoneyLauncher extends Application {
     public JSONConfiguration getLauncherSettingsConfig() {
         return launcherSettingsConfig;
     }
+
+
 }

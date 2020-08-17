@@ -40,7 +40,7 @@ public class SettingsGameController {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
 
-                double ramValue = (double)Math.round((double) newValue * 100d) / 100d;
+                double ramValue = (double)Math.round((double) newValue * 10d) / 10d;
                 main.getLauncherSettingsConfig().reloadConfiguration();
                 if(main.getLauncherSettingsConfig().getConfiguration().get("ram") != null) {
                     main.getLauncherSettingsConfig().getConfiguration().put("ram", ramValue);

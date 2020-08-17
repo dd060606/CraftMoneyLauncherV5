@@ -167,7 +167,10 @@ public class AuthController {
 
                     if (rememberMe.isSelected()) {
                         main.getAccountDataConfig().reloadConfiguration();
+                        main.getLauncherSettingsConfig().reloadConfiguration();
                         main.getAccountDataConfig().getConfiguration().put("token", Authentication.getAccount().getAccessToken());
+                        main.getLauncherSettingsConfig().getConfiguration().put("auto-auth", true);
+                        main.getLauncherSettingsConfig().saveConfiguration();
                         main.getAccountDataConfig().saveConfiguration();
                     } else {
                         main.getAccountDataConfig().reloadConfiguration();
