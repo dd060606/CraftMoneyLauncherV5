@@ -28,6 +28,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class CraftMoneyGame {
@@ -137,16 +139,15 @@ public class CraftMoneyGame {
 
         ProcessLogManager logManager = new ProcessLogManager(process.getInputStream(), new File(CRAFTMONEY_LOG_DIR, "last-game-logs.txt"));
         logManager.start();
-        try {
-            Thread.sleep(7000L);
 
-            process.waitFor();
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                System.exit(0);
+            }
+        }, 7000);
 
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        System.exit(0);
 
     }
 
