@@ -1,6 +1,7 @@
 package fr.dd06.craftmoney.launcher.home.controller;
 
 import fr.dd06.craftmoney.CraftMoneyLauncher;
+import fr.dd06.craftmoney.launcher.CraftMoneyGame;
 import fr.dd06.craftmoney.launcher.LauncherStage;
 import fr.dd06.craftmoney.launcher.auth.Authentication;
 import fr.dd06.craftmoney.launcher.auth.controller.AuthController;
@@ -120,6 +121,8 @@ public class LauncherController {
 
     @FXML
     private void play() {
+        CraftMoneyGame game = new CraftMoneyGame();
+        game.start();
 
     }
 
