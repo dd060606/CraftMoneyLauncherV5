@@ -36,6 +36,7 @@
 /*     */ public class GameFolder
 /*     */ {
 /*  38 */   public static final GameFolder BASIC = new GameFolder("assets", "libs", "natives", "minecraft.jar");
+            public static final GameFolder CRAFTMONEY = new GameFolder("assets", "libraries", "natives", "client.jar");
 /*     */ 
 /*     */ 
 /*     */ 

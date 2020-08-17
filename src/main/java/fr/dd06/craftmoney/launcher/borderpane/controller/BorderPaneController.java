@@ -2,6 +2,7 @@ package fr.dd06.craftmoney.launcher.borderpane.controller;
 
 import fr.dd06.apis.javautils.javafx.animation.AnimatorFX;
 import fr.dd06.apis.javautils.javafx.util.StageFX;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
 
@@ -13,7 +14,9 @@ public class BorderPaneController {
     }
     @FXML
     private void exit() {
-        AnimatorFX.fadeOutFrameFX(stage, AnimatorFX.FAST);
+        AnimatorFX.fadeOutFrameFX(stage, AnimatorFX.FAST, true);
+
+
     }
     @FXML
     private void minimize() {

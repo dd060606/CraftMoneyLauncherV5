@@ -121,7 +121,7 @@ public class LauncherController {
 
     @FXML
     private void play() {
-        CraftMoneyGame game = new CraftMoneyGame();
+        CraftMoneyGame game = new CraftMoneyGame(stage, main);
         game.start();
 
     }

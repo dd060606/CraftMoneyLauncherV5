@@ -1,0 +1,22 @@
+#updatePane {
+	-fx-background-image: url("../../../images/launcher-background-image.png");
+	-fx-background-position: center;
+	-fx-background-size: cover;
+}
+#updateBox {
+	-fx-background-color: rgba(52, 53, 53, 0.7);
+	-fx-background-radius: 30px;
+}
+.jfx-progress-bar > .track, .jfx-progress-bar > .bar {
+    -fx-background-radius: 0;
+    -fx-background-insets: 0;
+    -fx-background-radius: 5px;
+
+}
+.jfx-progress-bar > .track {
+    -fx-background-color: rgba(76, 76, 76, 0.5);
+
+}
+.jfx-progress-bar > .bar {
+    -fx-background-color: #0CA8F9;
+}

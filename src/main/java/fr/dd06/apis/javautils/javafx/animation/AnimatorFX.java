@@ -44,12 +44,18 @@ public class AnimatorFX {
 		timeline.play();
 	}
 
-	public static void fadeOutFrameFX(Stage toFade, double duration) {
+	public static void fadeOutFrameFX(Stage toFade, double duration, boolean exitOnAnimationFinished) {
 
 		Timeline timeline = new Timeline();
 		KeyFrame key = new KeyFrame(Duration.millis(duration), new KeyValue(toFade.opacityProperty(), 0));
 		timeline.getKeyFrames().add(key);
-		timeline.setOnFinished((exit) -> toFade.close());
+		timeline.setOnFinished((exit) -> {
+			toFade.close();
+			if (exitOnAnimationFinished) {
+				System.exit(0);
+			}
+
+		});
 		timeline.play();
 	}
 

@@ -19,7 +19,7 @@ public class SettingsBorderPaneController {
 
     @FXML
     private void exit() {
-        AnimatorFX.fadeOutFrameFX(settingsStage, AnimatorFX.FAST);
+        AnimatorFX.fadeOutFrameFX(settingsStage, AnimatorFX.FAST, false);
 
     }
     @FXML
