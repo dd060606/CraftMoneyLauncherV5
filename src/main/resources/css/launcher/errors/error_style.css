@@ -1,0 +1,29 @@
+#topBox {
+    -fx-background-color: #343535;
+}
+#exitButton {
+	-fx-background-color: transparent;
+	-fx-background-radius: 0px;
+}
+#exitButton:hover {
+	-fx-transition: 0.5s;
+	-fx-background-color: #E91A1A;
+	-fx-max-height: 25px;
+	-fx-border: none;
+}
+#errorBox {
+	-fx-background-color: #575656;
+
+}
+#okButton {
+	-fx-background-color: #545151;
+	-fx-background-radius: 10px;
+}
+#okButton:hover {
+	-fx-transition: 0.5s;
+	-fx-background-color: #666363;
+	-fx-border: none;
+}
+#errorPane{
+    -fx-background-radius: 10px;
+}

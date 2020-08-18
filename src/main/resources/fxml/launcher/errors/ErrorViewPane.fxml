@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="errorPane" prefHeight="350.0" prefWidth="500.0" stylesheets="@../../../css/launcher/errors/error_style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.dd06.craftmoney.launcher.errors.controller.ErrorController">
+   <children>
+      <HBox fx:id="errorPaneBox" layoutX="74.0" layoutY="114.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <GridPane prefHeight="350.0" prefWidth="595.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="169.79999389648438" minHeight="10.0" prefHeight="35.40000762939454" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="332.20001258850095" minHeight="10.0" prefHeight="315.39999237060545" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <HBox fx:id="topBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="500.0" GridPane.valignment="TOP">
+                     <children>
+                        <GridPane prefHeight="34.0" prefWidth="610.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Button fx:id="exitButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefHeight="33.0" prefWidth="50.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+                                 <graphic>
+                                    <ImageView fitHeight="33.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../images/exitButton.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Label text="ERREUR" textFill="#eaeaea">
+                                 <GridPane.margin>
+                                    <Insets left="25.0" />
+                                 </GridPane.margin>
+                                 <font>
+                                    <Font name="Arial Black" size="12.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </GridPane>
+                     </children>
+                  </HBox>
+                  <HBox fx:id="errorBox" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+                     <children>
+                        <GridPane prefHeight="315.0" prefWidth="614.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints maxHeight="108.59998168945313" minHeight="0.0" prefHeight="64.00001983642578" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="210.8" minHeight="10.0" prefHeight="102.80000610351563" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="193.3999542236328" minHeight="10.0" prefHeight="40.399993896484375" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="193.3999542236328" minHeight="10.0" prefHeight="112.80000000000001" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label text="Une erreur est survenue !" textFill="#eaeaea" GridPane.halignment="CENTER">
+                                 <font>
+                                    <Font name="Arial Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="errorType" text="Erreur" textFill="#eaeaea" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="Arial Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Hyperlink onAction="#openLogsDir" text="Ouvrir le répertoire de logs" textFill="#eaeaea" underline="true" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font name="Arial" size="14.0" />
+                                 </font>
+                              </Hyperlink>
+                              <Button fx:id="okButton" mnemonicParsing="false" onAction="#exit" prefHeight="35.0" prefWidth="100.0" text="OK" textFill="#eaeaea" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+                                 <GridPane.margin>
+                                    <Insets bottom="25.0" />
+                                 </GridPane.margin>
+                                 <font>
+                                    <Font name="Arial Black" size="12.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </GridPane>
+                     </children></HBox>
+               </children>
+            </GridPane>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
