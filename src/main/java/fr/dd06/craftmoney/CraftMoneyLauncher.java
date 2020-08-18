@@ -1,5 +1,7 @@
 package fr.dd06.craftmoney;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import fr.dd06.apis.javautils.java.configuration.JSONConfiguration;
 import fr.dd06.apis.javautils.java.util.directory.ProgramDir;
 import fr.dd06.craftmoney.launcher.CraftMoneyGame;
@@ -22,6 +24,7 @@ public class CraftMoneyLauncher extends Application {
 
 
     public static void main(String[] args) {
+
 
         launch(args);
     }

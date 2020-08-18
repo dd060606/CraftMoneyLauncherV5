@@ -1,0 +1,17 @@
+#modsPaneBox {
+	-fx-background-image: url("../../../images/settings-background-image.png");
+	-fx-background-position: center;
+	-fx-background-size: cover;
+} 
+#modBox, #modBox2, #modBox3 {
+	-fx-background-color: rgba(255, 255, 255, 0.7);
+	-fx-background-radius: 15px;
+}
+#installButton1,#installButton2,#installButton3 {
+		-fx-background-color: rgba(51, 210, 48, 0.9);
+	-fx-background-radius: 5px;
+}
+#installButton1:hover,#installButton2:hover,#installButton3:hover {
+		-fx-background-color: rgba(51, 220, 48, 1);
+	-fx-background-radius: 5px;
+}

@@ -1,5 +1,6 @@
 package fr.dd06.apis.javautils.java.configuration;
 
+import com.google.gson.JsonObject;
 import fr.dd06.apis.javautils.org.json.simple.JSONObject;
 import fr.dd06.apis.javautils.org.json.simple.parser.JSONParser;
 import fr.dd06.apis.javautils.org.json.simple.parser.ParseException;
@@ -9,6 +10,7 @@ import java.io.*;
 public class JSONConfiguration {
 	private File configFile;
 	private JSONObject jsonObject;
+
 	public JSONConfiguration(File configFile) {
 		this.configFile = configFile;
 	}

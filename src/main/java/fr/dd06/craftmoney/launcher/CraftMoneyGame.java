@@ -35,7 +35,7 @@ import java.util.TimerTask;
 public class CraftMoneyGame {
 
 
-    private static final GameVersion GAME_VERSION = new GameVersion("1.12", GameType.V1_8_HIGHER);
+    private static final GameVersion GAME_VERSION = new GameVersion("1.16", GameType.V1_8_HIGHER);
     private static final GameInfos GAME_INFOS = new GameInfos("CraftMoney", GAME_VERSION , new GameTweak[] {});
     private LauncherStage stage;
     private CraftMoneyLauncher main;
@@ -131,14 +131,11 @@ public class CraftMoneyGame {
         main.getLauncherSettingsConfig().saveConfiguration();
         double allocatedRam = Double.parseDouble(main.getLauncherSettingsConfig().getConfiguration().get("ram").toString());
         int allocatedRamInMb = (int) (allocatedRam * 1000);
-        profile.getVmArgs().addAll(Arrays.asList("-Xms2G", "-Xmx3G"));
+        profile.getVmArgs().addAll(Arrays.asList("-Xms1000m", "-Xmx" + allocatedRamInMb+"m"));
 
         ExternalLauncher launcher = new ExternalLauncher(profile);
 
         Process process = launcher.launch();
-
-        ProcessLogManager logManager = new ProcessLogManager(process.getInputStream(), new File(CRAFTMONEY_LOG_DIR, "last-game-logs.txt"));
-        logManager.start();
 
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {

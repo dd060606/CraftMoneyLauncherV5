@@ -5,6 +5,7 @@ import fr.dd06.craftmoney.launcher.CraftMoneyGame;
 import fr.dd06.craftmoney.launcher.LauncherStage;
 import fr.dd06.craftmoney.launcher.auth.Authentication;
 import fr.dd06.craftmoney.launcher.auth.controller.AuthController;
+import fr.dd06.craftmoney.launcher.home.mods.ModsStage;
 import fr.dd06.craftmoney.launcher.home.settings.SettingsStage;
 import javafx.animation.Animation;
 import javafx.animation.Interpolator;
@@ -163,7 +164,7 @@ public class LauncherController {
 
     @FXML
     private void openModsMenu() {
-
+        ModsStage modsStage = new ModsStage(main, stage);
     }
     @FXML
     private void openSettings() {
