@@ -169,7 +169,7 @@ public class AuthController {
                         main.getAccountDataConfig().reloadConfiguration();
                         main.getLauncherSettingsConfig().reloadConfiguration();
                         main.getAccountDataConfig().getConfiguration().put("token", Authentication.getAccount().getAccessToken());
-                        main.getLauncherSettingsConfig().getConfiguration().put("auto-auth", true);
+                        main.getLauncherSettingsConfig().getConfiguration().put("autoAuth", true);
                         main.getLauncherSettingsConfig().saveConfiguration();
                         main.getAccountDataConfig().saveConfiguration();
                     } else {

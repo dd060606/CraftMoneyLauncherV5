@@ -49,6 +49,7 @@ public class CraftMoneyGame {
 
     private UpdateController controller;
     private boolean gameLaunched = false;
+    private boolean downloadingMods = false;
 
     public CraftMoneyGame(LauncherStage stage, CraftMoneyLauncher main) {
         this.stage = stage;
@@ -62,11 +63,13 @@ public class CraftMoneyGame {
     }
 
     private void update() {
+
         CraftMoneyUpdater craftMoneyUpdater = new CraftMoneyUpdater(stage, main);
         Platform.runLater(()-> {
             controller.getUpdateLabel().setText("Recherche de mises à jours . . .");
         });
         Thread thread = new Thread(() -> {
+
             try {
 
                 craftMoneyUpdater.update( new IProgressCallback() {
@@ -80,6 +83,7 @@ public class CraftMoneyGame {
 
                     @Override
                     public void step(Step step) {
+
                         if(step == Step.FORGE) {
                             Platform.runLater(() -> {
                                 controller.getUpdateLabel().setText("Installation de forge . . .");
@@ -89,7 +93,7 @@ public class CraftMoneyGame {
                         if(step == Step.MODS) {
                             Platform.runLater(() -> {
                                 controller.getUpdateLabel().setText("Installation des Mods . . .");
-                                controller.getProgressBar().setProgress(ProgressBar.INDETERMINATE_PROGRESS);
+                                downloadingMods = true;
                             });
                         }
                         if(step == Step.READ) {
@@ -135,10 +139,20 @@ public class CraftMoneyGame {
                     @Override
                     public void update(int downloaded, int max) {
                         Platform.runLater(() -> {
-                            int updatePercentage = (100* downloaded) / max;
+                            if(!downloadingMods) {
 
-                            controller.getUpdateLabel().setText("Mise à jour en cours (" + updatePercentage + "%)");
-                            controller.getProgressBar().setProgress((double) updatePercentage / 100);
+                                int updatePercentage = (100* downloaded) / max;
+
+                                controller.getUpdateLabel().setText("Mise à jour en cours (" + updatePercentage + "%)");
+                                controller.getProgressBar().setProgress((double) updatePercentage / 100);
+                            }
+                            else {
+                                int updatePercentage = (100* downloaded) / max;
+
+                                controller.getUpdateLabel().setText("Téléchargement des mods (" + updatePercentage + "%)");
+                                controller.getProgressBar().setProgress((double) updatePercentage / 100);
+                            }
+
                         });
 
                     }

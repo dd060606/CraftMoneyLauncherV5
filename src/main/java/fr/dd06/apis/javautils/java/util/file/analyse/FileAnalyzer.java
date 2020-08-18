@@ -1,12 +1,14 @@
-package fr.dd06.apis.javautils.java.util.file.hash;
+package fr.dd06.apis.javautils.java.util.file.analyse;
 
 
 
 import fr.dd06.apis.javautils.java.configuration.JSONConfiguration;
 
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -29,11 +31,32 @@ public class FileAnalyzer {
 
         return null;
     }
+    public String getInputstreamMD5(InputStream inputStream) {
+        try {
+            MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+            String fileMD5 = getInputstreamChecksum(messageDigest, inputStream);
+            return fileMD5;
+        } catch (NoSuchAlgorithmException | IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 
     public boolean checkMD5Files(File file, File fileToCompare) {
         String file1MD5 = getFileMD5(file);
         String fileToCompareMD5 = getFileMD5(fileToCompare);
         if (file1MD5.equals(fileToCompareMD5)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    public boolean checkMD5FileWithInputstream(File file, InputStream inputStreamToCompare) {
+        String file1MD5 = getFileMD5(file);
+        String inputStreamToCompareMD5 = getInputstreamMD5(inputStreamToCompare);
+        if (file1MD5.equals(inputStreamToCompareMD5)) {
             return true;
         }
         else {
@@ -89,6 +112,36 @@ public class FileAnalyzer {
 
 
         fis.close();
+
+
+        byte[] bytes = digest.digest();
+
+
+        StringBuilder sb = new StringBuilder();
+        for(int i=0; i< bytes.length ;i++)
+        {
+            sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+        }
+
+
+        return sb.toString();
+    }
+    private String getInputstreamChecksum(MessageDigest digest, InputStream inputStream) throws IOException
+    {
+
+
+
+
+        byte[] byteArray = new byte[1024];
+        int bytesCount = 0;
+
+
+        while ((bytesCount = inputStream.read(byteArray)) != -1) {
+            digest.update(byteArray, 0, bytesCount);
+        }
+
+
+        inputStream.close();
 
 
         byte[] bytes = digest.digest();

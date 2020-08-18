@@ -1,6 +1,5 @@
 package fr.dd06.craftmoney.launcher.update;
 
-import fr.dd06.apis.javautils.java.util.file.hash.FileAnalyzer;
 import fr.dd06.craftmoney.CraftMoneyLauncher;
 import fr.dd06.craftmoney.launcher.CraftMoneyGame;
 import fr.dd06.craftmoney.launcher.LauncherStage;
@@ -14,11 +13,9 @@ import fr.flowarg.flowupdater.versions.VersionType;
 import fr.flowarg.flowupdater.versions.download.IProgressCallback;
 import fr.flowarg.flowupdater.versions.download.Mod;
 import javafx.application.Platform;
-import sun.misc.Launcher;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,8 +43,8 @@ public class CraftMoneyUpdater {
     public void update(IProgressCallback callback) throws IOException {
 
 
-        List<Mod> listMods = new ArrayList<>();
-        listMods.add(new Mod("Botania+r1.10-363.jar", "54b0b10d5a01a17dba2b50d2104f2ff970c98f84",13814617, "https://www.curseforge.com/minecraft/mc-mods/botania/download/2846950/file" ));
+            List<Mod> listMods = Mod.getModsFromJson("https://drive.google.com/u/0/uc?id=1uvezMIhvoz1I3DfOCAHKziNcg5wb7cpZ&export=download");
+
         try {
             updater = new FlowUpdater.FlowUpdaterBuilder().withVersion(version).withSilentUpdate(true).withLogger(updateLogger).withProgressCallback(callback).withForgeVersion(new NewForgeVersion("1.12.2-14.23.5.2854", version, updateLogger, callback, listMods, true).enableModFileDeleter()).build();
 
@@ -58,6 +55,7 @@ public class CraftMoneyUpdater {
 
 
         try {
+
             updater.update(CraftMoneyGame.CRAFTMONEY_GAME_DIR, false);
         } catch (Exception e) {
             Platform.runLater(() -> {
