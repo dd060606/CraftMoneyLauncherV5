@@ -11,7 +11,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.google.code.gson:gson:2.8.0'
+    implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'com.jfoenix:jfoenix:8.0.8'
     implementation 'fr.flowarg:flowupdater:1.1.7'
     implementation 'fr.flowarg:flowmultitools:1.0.4'
