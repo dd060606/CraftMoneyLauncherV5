@@ -14,7 +14,7 @@ import java.io.IOException;
 
 public class CraftMoneyLauncher extends Application {
 
-    private final File CRAFTMONEY_PROGRAM_DIR = ProgramDir.createProgramDir("CraftMoney");
+    public static final File CRAFTMONEY_PROGRAM_DIR = ProgramDir.createProgramDir("CraftMoney");
     private final File ACCOUNT_DATA = new File(CRAFTMONEY_PROGRAM_DIR, "account_data.json");
     private JSONConfiguration accountDataConfig = new JSONConfiguration(ACCOUNT_DATA);
     private final File LAUNCHER_SETTINGS = new File(CRAFTMONEY_PROGRAM_DIR, "launcher_settings.json");

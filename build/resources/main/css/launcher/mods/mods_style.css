@@ -11,7 +11,3 @@
 		-fx-background-color: rgba(51, 210, 48, 0.9);
 	-fx-background-radius: 5px;
 }
-#installButton1:hover,#installButton2:hover,#installButton3:hover {
-		-fx-background-color: rgba(51, 220, 48, 1);
-	-fx-background-radius: 5px;
-}

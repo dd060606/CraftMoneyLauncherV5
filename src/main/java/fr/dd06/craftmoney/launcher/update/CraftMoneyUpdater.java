@@ -4,6 +4,7 @@ import fr.dd06.craftmoney.CraftMoneyLauncher;
 import fr.dd06.craftmoney.launcher.CraftMoneyGame;
 import fr.dd06.craftmoney.launcher.LauncherStage;
 import fr.dd06.craftmoney.launcher.errors.ErrorStage;
+import fr.dd06.craftmoney.launcher.home.mods.CraftMoneyOptionalMods;
 import fr.flowarg.flowlogger.Logger;
 import fr.flowarg.flowupdater.FlowUpdater;
 import fr.flowarg.flowupdater.utils.BuilderArgumentException;
@@ -16,7 +17,7 @@ import javafx.application.Platform;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
+
 import java.util.List;
 
 public class CraftMoneyUpdater {
@@ -44,7 +45,7 @@ public class CraftMoneyUpdater {
 
 
             List<Mod> listMods = Mod.getModsFromJson("https://drive.google.com/u/0/uc?id=1uvezMIhvoz1I3DfOCAHKziNcg5wb7cpZ&export=download");
-
+        CraftMoneyOptionalMods optionalMods = new CraftMoneyOptionalMods();
         try {
             updater = new FlowUpdater.FlowUpdaterBuilder().withVersion(version).withSilentUpdate(true).withLogger(updateLogger).withProgressCallback(callback).withForgeVersion(new NewForgeVersion("1.12.2-14.23.5.2854", version, updateLogger, callback, listMods, true).enableModFileDeleter()).build();
 
@@ -73,19 +74,6 @@ public class CraftMoneyUpdater {
 
     }
 
-    public IVanillaVersion.Builder getVersionBuilder() {
-        return versionBuilder;
-    }
 
-    public IVanillaVersion getVersion() {
-        return version;
-    }
-
-    public FlowUpdater getUpdater() {
-        return updater;
-    }
-    public Logger getUpdateLogger() {
-        return updateLogger;
-    }
 
 }

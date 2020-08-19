@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="677.0" prefWidth="810.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.dd06.craftmoney.launcher.home.mods.controllers.ModsController">
    <children>
       <HBox fx:id="modsPaneBox" layoutX="355.0" layoutY="124.0" prefHeight="677.0" prefWidth="810.0" stylesheets="@../../../css/launcher/mods/mods_style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -58,7 +57,7 @@
                                           <Font name="Arial Black" size="18.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="installButton1" mnemonicParsing="false" text="Installer" textFill="#111111" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                                    <Button fx:id="installButton1" mnemonicParsing="false" onAction="#installMod1" text="Installer" textFill="#111111" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                                        <font>
                                           <Font name="Arial Black" size="14.0" />
                                        </font>
@@ -86,7 +85,7 @@
                                           <Font name="Arial Black" size="18.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="installButton2" mnemonicParsing="false" text="Installer" textFill="#111111" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                                    <Button fx:id="installButton2" mnemonicParsing="false" onAction="#installMod2" text="Installer" textFill="#111111" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                                        <font>
                                           <Font name="Arial Black" size="14.0" />
                                        </font>
@@ -114,7 +113,7 @@
                                           <Font name="Arial Black" size="18.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="installButton3" mnemonicParsing="false" text="Installer" textFill="#111111" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                                    <Button fx:id="installButton3" mnemonicParsing="false" onAction="#installMod3" text="Installer" textFill="#111111" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                                        <font>
                                           <Font name="Arial Black" size="14.0" />
                                        </font>
