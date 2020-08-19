@@ -80,24 +80,36 @@ public class ModsController {
         if(mod1Installed) {
             Platform.runLater(() -> {
                 installButton1.setText("Desinstallation ...");
+                installButton1.setDisable(true);
             });
 
             File mod1File = new File(CraftMoneyGame.CRAFTMONEY_GAME_DIR, "/mods/journeyMap.jar");
             if(mod1File.exists()) {
                 mod1File.delete();
             }
+
+
             modConfig.reloadConfiguration();
             modConfig.getConfiguration().put("mod1", false);
             modConfig.saveConfiguration();
+            Platform.runLater(() -> {
+                installButton1.setDisable(false);
+            });
             mod1Installed = Boolean.parseBoolean(modConfig.getConfiguration().get("mod1").toString());
             setMod1Button();
         }
         else {
             Platform.runLater(() -> {
                 installButton1.setText("Installation ...");
+                Platform.runLater(() -> {
+                    installButton1.setDisable(true);
+                });
             });
             Thread downloadThread = new Thread(() -> {
                 File mod1File = new File(CraftMoneyGame.CRAFTMONEY_GAME_DIR, "/mods/journeyMap.jar");
+                if(mod1File.exists()) {
+                    mod1File.delete();
+                }
                 try {
                     CraftMoneyOptionalMods.downloadOptionalMod("journeyMap", new URL("http://dd06dev.planethoster.world/download_center/launchers/craftmoney/mods/journeymap-1.12.2-5.7.1.jar"), CraftMoneyGame.CRAFTMONEY_GAME_DIR);
                 } catch (IOException e) {
@@ -111,6 +123,9 @@ public class ModsController {
                 modConfig.reloadConfiguration();
                 modConfig.getConfiguration().put("mod1", true);
                 modConfig.saveConfiguration();
+                Platform.runLater(() -> {
+                    installButton1.setDisable(false);
+                });
                 mod1Installed = Boolean.parseBoolean(modConfig.getConfiguration().get("mod1").toString());
                 setMod1ButtonUnistall();
             }) ;

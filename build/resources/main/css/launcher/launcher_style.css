@@ -1,11 +1,14 @@
 #launcherPane {
-	-fx-background-image: url("../../images/launcher-background-image.png");
+	-fx-background-image: url("../../images/background-image.png");
 	-fx-background-position: center;
 	-fx-background-size: cover;
 }
 #accountBox {
-	-fx-background-color: rgba(201, 207, 201, 0.6);
-	-fx-background-radius: 10px;
+	-fx-background-color: rgba(15, 222, 121, 0.3);
+	-fx-background-radius: 30px;
+	-fx-border-width: 3px;
+	-fx-border-color: linear-gradient(to right, #10EEEC, #06F26C);
+	-fx-border-radius: 30px;
 }
 #logoutButton {
 	-fx-background-color: transparent;
@@ -19,25 +22,23 @@
 	-fx-background-radius: 15px;
 }
 #playButton {
-	-fx-background-color: #29D816;
+	-fx-background-color: transparent;
 	-fx-background-radius: 30px;
 }
 #playButton:hover {
-	-fx-background-color: #25B615;
+	-fx-background-color: rgba(0,0,0, 0.7);
 }
 #settingsButton {
-	-fx-background-color: #29D816;
+	-fx-background-color: transparent;
 	-fx-background-radius: 15px;
 }
-#settingsButton:hover {
-	-fx-background-color: #25B615;
-}
+
 #modsButton {
-	-fx-background-color: #29D816;
+	-fx-background-color: #00a3d9;
 	-fx-background-radius: 30px;
 }
 #modsButton:hover {
-	-fx-background-color: #25B615;
+	-fx-background-color: #0797c7;
 }
 #webButton, #discordButton, #youtubeButton {
 	-fx-background-color: transparent;
@@ -48,8 +49,18 @@
 
 }
 #infoBox {
-	-fx-background-color: rgba(200, 200, 200, 0.5);
+	-fx-background-color: rgba(15, 222, 121, 0.3);
 	-fx-background-radius: 30px;
+	-fx-border-width: 5px;
+	-fx-border-color: linear-gradient(to right, #10EEEC, #06F26C);
+	-fx-border-radius: 30px;
+}
+#logoImage {
+	-fx-background-radius: 100px;
+	-fx-background-image: url("../../images/logo/icon.png");
+	-fx-background-position: center;
+	-fx-background-size: cover;
+	-fx-border-radius: 100px;
 }
 
 

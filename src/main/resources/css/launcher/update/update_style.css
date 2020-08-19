@@ -1,5 +1,5 @@
 #updatePane {
-	-fx-background-image: url("../../../images/launcher-background-image.png");
+	-fx-background-image: url("../../../images/background-image.png");
 	-fx-background-position: center;
 	-fx-background-size: cover;
 }

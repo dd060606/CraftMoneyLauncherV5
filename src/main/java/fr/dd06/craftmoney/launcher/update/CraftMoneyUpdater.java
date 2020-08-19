@@ -44,10 +44,10 @@ public class CraftMoneyUpdater {
     public void update(IProgressCallback callback) throws IOException {
 
 
-            List<Mod> listMods = Mod.getModsFromJson("https://drive.google.com/u/0/uc?id=1uvezMIhvoz1I3DfOCAHKziNcg5wb7cpZ&export=download");
+        List<Mod> mods = Mod.getModsFromJson("http://dd06dev.planethoster.world/download_center/launchers/craftmoney/mods/mods.json");
         CraftMoneyOptionalMods optionalMods = new CraftMoneyOptionalMods();
         try {
-            updater = new FlowUpdater.FlowUpdaterBuilder().withVersion(version).withSilentUpdate(true).withLogger(updateLogger).withProgressCallback(callback).withForgeVersion(new NewForgeVersion("1.12.2-14.23.5.2854", version, updateLogger, callback, listMods, true).enableModFileDeleter()).build();
+            updater = new FlowUpdater.FlowUpdaterBuilder().withVersion(version).withSilentUpdate(true).withLogger(updateLogger).withProgressCallback(callback).withForgeVersion(new NewForgeVersion("1.12.2-14.23.5.2854", version, updateLogger, callback, mods, true).enableModFileDeleter()).build();
 
         } catch (BuilderArgumentException e) {
             e.printStackTrace();

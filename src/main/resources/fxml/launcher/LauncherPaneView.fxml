@@ -59,23 +59,23 @@
                                  <children>
                                     <Button fx:id="logoutButton" mnemonicParsing="false" onAction="#logout" text="Déconnexion" textFill="#111111" GridPane.halignment="CENTER" GridPane.rowIndex="4">
                                        <font>
-                                          <Font name="Segoe UI Black Italic" size="15.0" />
+                                          <Font name="Segoe UI Black Italic" size="14.0" />
                                        </font>
                                     </Button>
                                     <Label fx:id="playerName" text="Pseudo: 111111111111" textFill="#111111" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                                        <font>
-                                          <Font name="Arial Black" size="14.0" />
+                                          <Font name="Arial Black" size="13.0" />
                                        </font>
                                     </Label>
                                     <ImageView fx:id="playerHead" fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                                     <Label fx:id="playerRank" layoutX="16.0" layoutY="78.0" text="Grade: Joueur" textFill="#111111" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                                        <font>
-                                          <Font name="Arial Black" size="14.0" />
+                                          <Font name="Arial Black" size="13.0" />
                                        </font>
                                     </Label>
                                     <Label fx:id="shopPoints" layoutX="56.0" layoutY="114.0" text="Points boutiques: 11000" textFill="#111111" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                                        <font>
-                                          <Font name="Arial Black" size="14.0" />
+                                          <Font name="Arial Black" size="13.0" />
                                        </font>
                                     </Label>
                                  </children>
@@ -109,7 +109,7 @@
                                     </ImageView>
                                  </graphic>
                                  <GridPane.margin>
-                                    <Insets left="20.0" />
+                                    <Insets left="150.0" />
                                  </GridPane.margin>
                               </Button>
                               <GridPane GridPane.columnIndex="1">
@@ -138,7 +138,7 @@
                                           <Insets />
                                        </GridPane.margin>
                                        <graphic>
-                                          <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true">
+                                          <ImageView fitHeight="40.0" fitWidth="43.0" pickOnBounds="true">
                                              <image>
                                                 <Image url="@../../images/logo/launcher-logo/download-logo.png" />
                                              </image>
@@ -147,14 +147,11 @@
                                     </Button>
                                  </children>
                               </GridPane>
-                              <ImageView fitHeight="125.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                              <HBox fx:id="logoImage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="125.0" prefWidth="125.0">
                                  <GridPane.margin>
                                     <Insets left="40.0" />
                                  </GridPane.margin>
-                                 <image>
-                                    <Image url="@../../images/logo/icon.png" />
-                                 </image>
-                              </ImageView>
+                              </HBox>
                            </children>
                         </GridPane>
                      </children>
@@ -170,11 +167,11 @@
                      <children>
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <GridPane prefHeight="278.0" prefWidth="668.0">
+                              <GridPane prefHeight="278.0" prefWidth="650.0">
                                 <columnConstraints>
-                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="252.39999389648438" minWidth="10.0" prefWidth="160.4" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="399.3999996185303" minWidth="10.0" prefWidth="339.4" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="476.9999694824219" minWidth="10.0" prefWidth="59.399982070922874" />
                                 </columnConstraints>
                                 <rowConstraints>
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="BOTTOM" vgrow="SOMETIMES" />
@@ -192,7 +189,7 @@
                                           </ImageView>
                                        </graphic>
                                     </Button>
-                                    <Button fx:id="discordButton" layoutX="91.0" layoutY="262.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openCraftMoneyDiscord" prefHeight="50.0" prefWidth="50.0" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                                    <Button fx:id="discordButton" layoutX="91.0" layoutY="262.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openCraftMoneyDiscord" prefHeight="50.0" prefWidth="50.0" GridPane.columnIndex="1" GridPane.halignment="LEFT">
                                        <GridPane.margin>
                                           <Insets bottom="50.0" />
                                        </GridPane.margin>
@@ -204,9 +201,9 @@
                                           </ImageView>
                                        </graphic>
                                     </Button>
-                                    <Button fx:id="youtubeButton" layoutX="304.0" layoutY="262.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openCraftMoneyYoutube" prefHeight="50.0" prefWidth="50.0" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+                                    <Button fx:id="youtubeButton" layoutX="304.0" layoutY="262.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openCraftMoneyYoutube" prefHeight="50.0" prefWidth="50.0" GridPane.columnIndex="1" GridPane.halignment="LEFT">
                                        <GridPane.margin>
-                                          <Insets bottom="50.0" />
+                                          <Insets bottom="50.0" left="125.0" />
                                        </GridPane.margin>
                                        <graphic>
                                           <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
@@ -236,11 +233,6 @@
                                     <RowConstraints maxHeight="187.40000762939454" minHeight="10.0" prefHeight="98.20000762939455" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Label alignment="TOP_LEFT" contentDisplay="CENTER" text="Informations" textFill="#111111">
-                                       <font>
-                                          <Font name="Gill Sans Ultra Bold" size="18.0" />
-                                       </font>
-                                    </Label>
                                     <Label fx:id="infoText1" text="Aucune informations à afficher" textFill="#111111" GridPane.rowIndex="1">
                                        <font>
                                           <Font name="Gill Sans Ultra Bold" size="12.0" />
@@ -256,6 +248,11 @@
                                           <Font name="Gill Sans Ultra Bold" size="12.0" />
                                        </font>
                                     </Label>
+                                    <ImageView fitHeight="65.0" fitWidth="205.0" pickOnBounds="true" GridPane.valignment="TOP">
+                                       <image>
+                                          <Image url="@../../images/logo/launcher-logo/info-logo.png" />
+                                       </image>
+                                    </ImageView>
                                  </children>
                               </GridPane>
                            </children>

@@ -68,6 +68,14 @@
                         <Insets top="75.0" />
                      </GridPane.margin>
                   </Label>
+                  <Label layoutX="221.0" layoutY="125.0" text="Les deisgns ont été réalisés par Julien 2004" textFill="#eaeaea" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                     <font>
+                        <Font name="Arial Black" size="12.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets top="100.0" />
+                     </GridPane.margin>
+                  </Label>
       
                </children>
             </GridPane>

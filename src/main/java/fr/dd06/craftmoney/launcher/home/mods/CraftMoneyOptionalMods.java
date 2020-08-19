@@ -17,8 +17,5 @@ public class CraftMoneyOptionalMods {
         Files.copy(urlOfMod.openStream(), mod.toPath());
 
     }
-    public void addOptionalsMods() {
 
-
-    }
 }
