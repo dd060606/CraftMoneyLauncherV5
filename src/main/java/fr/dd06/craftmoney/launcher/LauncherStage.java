@@ -155,7 +155,10 @@ public class LauncherStage {
 
             AuthController controller = loader.getController();
             controller.init(main, this);
-            container.setCenter(anchorPane);
+            Platform.runLater(() -> {
+                container.setCenter(anchorPane);
+            });
+
         } catch (IOException e) {
             e.printStackTrace();
         }
