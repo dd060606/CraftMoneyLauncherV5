@@ -29,8 +29,8 @@ public class ErrorStage extends Stage {
         this.setTitle("CraftMoney Launcher | Erreur");
         this.initOwner(launcherStage.getStage());
         this.initModality(Modality.WINDOW_MODAL);
-        this.setWidth(500);
-        this.setHeight(350);
+        this.setWidth(350);
+        this.setHeight(300);
         this.initStyle(StageStyle.UNDECORATED);
         this.setResizable(false);
 

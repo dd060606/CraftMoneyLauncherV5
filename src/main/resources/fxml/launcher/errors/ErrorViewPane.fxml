@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="errorPane" prefHeight="350.0" prefWidth="500.0" stylesheets="@../../../css/launcher/errors/error_style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.dd06.craftmoney.launcher.errors.controller.ErrorController">
+<AnchorPane fx:id="errorPane" prefHeight="300.0" prefWidth="350.0" stylesheets="@../../../css/launcher/errors/error_style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.dd06.craftmoney.launcher.errors.controller.ErrorController">
    <children>
       <HBox fx:id="errorPaneBox" layoutX="74.0" layoutY="114.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -22,11 +22,11 @@
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints maxHeight="169.79999389648438" minHeight="10.0" prefHeight="35.40000762939454" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="332.20001258850095" minHeight="10.0" prefHeight="315.39999237060545" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="169.79999389648438" minHeight="10.0" prefHeight="33.599981689453124" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="332.20001258850095" minHeight="10.0" prefHeight="267.20001831054685" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <HBox fx:id="topBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="500.0" GridPane.valignment="TOP">
+                  <HBox fx:id="topBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="350.0" GridPane.valignment="TOP">
                      <children>
                         <GridPane prefHeight="34.0" prefWidth="610.0">
                           <columnConstraints>
@@ -58,7 +58,7 @@
                         </GridPane>
                      </children>
                   </HBox>
-                  <HBox fx:id="errorBox" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+                  <HBox fx:id="errorBox" prefHeight="270.0" prefWidth="351.0" GridPane.rowIndex="1">
                      <children>
                         <GridPane prefHeight="315.0" prefWidth="614.0">
                           <columnConstraints>
