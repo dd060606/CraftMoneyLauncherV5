@@ -20,7 +20,7 @@ public class CraftMoneyLauncher extends Application {
     private final File LAUNCHER_SETTINGS = new File(CRAFTMONEY_PROGRAM_DIR, "launcher_settings.json");
     private JSONConfiguration launcherSettingsConfig = new JSONConfiguration(LAUNCHER_SETTINGS);
 
-
+    private LauncherStage launcherStage;
 
 
     public static void main(String[] args) {
@@ -62,7 +62,7 @@ public class CraftMoneyLauncher extends Application {
     @Override
     public void start(Stage primaryStage) {
         initLauncher();
-        LauncherStage launcherStage = new LauncherStage(primaryStage, this);
+        launcherStage = new LauncherStage(primaryStage, this);
 
     }
 
@@ -74,5 +74,8 @@ public class CraftMoneyLauncher extends Application {
         return launcherSettingsConfig;
     }
 
+    public LauncherStage getLauncherStage() {
+        return launcherStage;
+    }
 
 }

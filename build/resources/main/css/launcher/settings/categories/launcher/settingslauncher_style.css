@@ -1,4 +1,4 @@
-#settingsAuthBox, #settingsLowRamBox {
+#settingsAuthBox, #settingsLowRamBox, #settingsUpdateBox {
 	-fx-border-width: 2 0 0 0;
 	-fx-border-color: #eaeaea;
 }
@@ -6,3 +6,11 @@
  .jfx-toggle-button {
  	    -jfx-toggle-color: #0CA8F9;
  }
+ #updateButton {
+
+      -fx-background-color: rgba(255,255,255, 0.3);
+ }
+  #updateButton:hover {
+
+       -fx-background-color: rgba(255,255,255, 0.5);
+  }
