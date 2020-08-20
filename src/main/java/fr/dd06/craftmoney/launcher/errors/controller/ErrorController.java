@@ -6,6 +6,7 @@ import fr.dd06.craftmoney.launcher.CraftMoneyGame;
 import fr.dd06.craftmoney.launcher.LauncherStage;
 import fr.dd06.craftmoney.launcher.errors.ErrorStage;
 import fr.dd06.craftmoney.launcher.home.controller.LauncherController;
+import fr.dd06.craftmoney.launcher.utils.CrashLogger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -34,9 +35,9 @@ public class ErrorController {
         this.main = main;
     }
     @FXML
-    private void openLogsDir() {
+    private void openCrashesDir() {
         try {
-            Desktop.getDesktop().open(CraftMoneyGame.CRAFTMONEY_LOG_DIR);
+            Desktop.getDesktop().open(CrashLogger.CRASH_DIR);
         } catch (IOException e) {
             e.printStackTrace();
         }

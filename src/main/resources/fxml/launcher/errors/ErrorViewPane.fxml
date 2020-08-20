@@ -81,7 +81,7 @@
                                     <Font name="Arial Bold" size="14.0" />
                                  </font>
                               </Label>
-                              <Hyperlink onAction="#openLogsDir" text="Ouvrir le répertoire de logs" textFill="#eaeaea" underline="true" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                              <Hyperlink onAction="#openCrashesDir" text="Ouvrir le répertoire de crashs" textFill="#eaeaea" underline="true" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                                  <font>
                                     <Font name="Arial" size="14.0" />
                                  </font>

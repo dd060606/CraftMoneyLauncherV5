@@ -6,6 +6,7 @@ import fr.dd06.apis.javautils.java.configuration.JSONConfiguration;
 import fr.dd06.apis.javautils.java.util.directory.ProgramDir;
 import fr.dd06.craftmoney.launcher.CraftMoneyGame;
 import fr.dd06.craftmoney.launcher.LauncherStage;
+import fr.dd06.craftmoney.launcher.utils.CrashLogger;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -34,6 +35,7 @@ public class CraftMoneyLauncher extends Application {
         CRAFTMONEY_PROGRAM_DIR.mkdirs();
         CraftMoneyGame.CRAFTMONEY_GAME_DIR.mkdirs();
         CraftMoneyGame.CRAFTMONEY_LOG_DIR.mkdirs();
+        CrashLogger.CRASH_DIR.mkdirs();
 
         if(!ACCOUNT_DATA.exists()) {
             try {

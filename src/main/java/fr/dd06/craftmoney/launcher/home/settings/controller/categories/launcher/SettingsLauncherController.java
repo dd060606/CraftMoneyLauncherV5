@@ -5,6 +5,7 @@ import fr.dd06.apis.javautils.java.util.file.analyse.FileAnalyzer;
 import fr.dd06.craftmoney.CraftMoneyLauncher;
 import fr.dd06.craftmoney.launcher.errors.ErrorStage;
 import fr.dd06.craftmoney.launcher.home.settings.SettingsStage;
+import fr.dd06.craftmoney.launcher.utils.CrashLogger;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.HPos;
@@ -93,8 +94,15 @@ public class SettingsLauncherController {
                         launchLauncherUpdater(launcherUpdaterFile);
                     }
 
-                } catch (IOException e) {
-                    e.printStackTrace();
+                } catch (Exception e) {
+                    Platform.runLater(() -> {
+                        ErrorStage errorStage = new ErrorStage(main.getLauncherStage(), main);
+                        errorStage.getController().setErrorType("Impossible de mettre à jour le launcher !");
+                        CrashLogger crashLogger = new CrashLogger();
+                        crashLogger.createCrashLog(e);
+                        updateButton.setDisable(false);
+                        updateButton.setText("Mettre à jour");
+                    });
                 }
 
             });
@@ -106,8 +114,17 @@ public class SettingsLauncherController {
             Thread downloadUpdaterThread = new Thread(() -> {
                 try {
                     downloadLauncherUpdater(new URL("http://dd06dev.planethoster.world/download_center/launchers/craftmoney/CraftMoney%20Launcher.exe"));
-                } catch (IOException e) {
-                    e.printStackTrace();
+                } catch (Exception e) {
+
+                    Platform.runLater(() -> {
+                        ErrorStage errorStage = new ErrorStage(main.getLauncherStage(), main);
+                        errorStage.getController().setErrorType("Impossible de mettre à jour le launcher !");
+                        CrashLogger crashLogger = new CrashLogger();
+                        crashLogger.createCrashLog(e);
+                        updateButton.setDisable(false);
+                        updateButton.setText("Mettre à jour");
+
+                    });
                 }
                 launchLauncherUpdater(launcherUpdaterFile);
             });
@@ -126,10 +143,14 @@ public class SettingsLauncherController {
         try {
             Process process = Runtime.getRuntime().exec(launcherUpdater.getAbsolutePath());
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             Platform.runLater(() -> {
                 ErrorStage errorStage = new ErrorStage(main.getLauncherStage(), main);
                 errorStage.getController().setErrorType("Impossible de lancer le launcher !");
+                CrashLogger crashLogger = new CrashLogger();
+                crashLogger.createCrashLog(e);
+                updateButton.setDisable(false);
+                updateButton.setText("Mettre à jour");
 
             });
             return;

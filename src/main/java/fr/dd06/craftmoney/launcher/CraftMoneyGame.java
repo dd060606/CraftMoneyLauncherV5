@@ -11,6 +11,7 @@ import fr.dd06.craftmoney.launcher.auth.Authentication;
 import fr.dd06.craftmoney.launcher.errors.ErrorStage;
 import fr.dd06.craftmoney.launcher.update.CraftMoneyUpdater;
 import fr.dd06.craftmoney.launcher.update.controller.UpdateController;
+import fr.dd06.craftmoney.launcher.utils.CrashLogger;
 import fr.flowarg.flowlogger.Logger;
 import fr.flowarg.flowupdater.FlowUpdater;
 import fr.flowarg.flowupdater.utils.BuilderArgumentException;
@@ -38,7 +39,7 @@ public class CraftMoneyGame {
 
 
     private static final GameVersion GAME_VERSION = new GameVersion("1.12", GameType.V1_8_HIGHER);
-    private static final GameInfos GAME_INFOS = new GameInfos("CraftMoney", GAME_VERSION , new GameTweak[] {
+    private static final GameInfos GAME_INFOS = new GameInfos("CraftMoney", GAME_VERSION, new GameTweak[]{
             GameTweak.FORGE
     });
     private LauncherStage stage;
@@ -65,17 +66,17 @@ public class CraftMoneyGame {
     private void update() {
 
         CraftMoneyUpdater craftMoneyUpdater = new CraftMoneyUpdater(stage, main);
-        Platform.runLater(()-> {
+        Platform.runLater(() -> {
             controller.getUpdateLabel().setText("Recherche de mises à jours . . .");
         });
         Thread thread = new Thread(() -> {
 
             try {
 
-                craftMoneyUpdater.update( CRAFTMONEY_GAME_DIR, new IProgressCallback() {
+                craftMoneyUpdater.update(CRAFTMONEY_GAME_DIR, new IProgressCallback() {
                     @Override
                     public void init() {
-                        Platform.runLater(()-> {
+                        Platform.runLater(() -> {
                             controller.getUpdateLabel().setText("Initialisation de la mise à jour . . .");
                         });
 
@@ -84,30 +85,30 @@ public class CraftMoneyGame {
                     @Override
                     public void step(Step step) {
 
-                        if(step == Step.FORGE) {
+                        if (step == Step.FORGE) {
                             Platform.runLater(() -> {
                                 controller.getUpdateLabel().setText("Installation de forge . . .");
                                 controller.getProgressBar().setProgress(ProgressBar.INDETERMINATE_PROGRESS);
                             });
                         }
-                        if(step == Step.MODS) {
+                        if (step == Step.MODS) {
                             Platform.runLater(() -> {
                                 controller.getUpdateLabel().setText("Installation des Mods . . .");
                                 downloadingMods = true;
                             });
                         }
-                        if(step == Step.READ) {
+                        if (step == Step.READ) {
                             Platform.runLater(() -> {
                                 controller.getUpdateLabel().setText("Lecture des fichiers . . .");
                             });
                         }
-                        if(step == Step.EXTERNAL_FILES ||step == Step.EXTRACT_NATIVES) {
+                        if (step == Step.EXTERNAL_FILES || step == Step.EXTRACT_NATIVES) {
                             Platform.runLater(() -> {
                                 controller.getUpdateLabel().setText("Extraction des fichiers . . .");
                             });
                         }
 
-                        if(step == Step.END) {
+                        if (step == Step.END) {
                             Platform.runLater(() -> {
                                 controller.getUpdateLabel().setText("Lancement du jeu . . .");
                                 controller.getProgressBar().setProgress(1);
@@ -115,14 +116,19 @@ public class CraftMoneyGame {
                                 try {
                                     launchGame();
                                 } catch (LaunchException e) {
-                                    ErrorStage errorStage = new ErrorStage(stage, main);
-                                    errorStage.getController().setErrorType("Impossible de lancer le jeu !");
+
+                                    ErrorStage error = new ErrorStage(stage, main);
+                                    error.getController().setErrorType("Impossible de lancer le jeu !");
+                                    CrashLogger crashLogger = new CrashLogger();
+                                    crashLogger.createCrashLog(e);
+
+
                                     System.out.println("[CraftMoney] : Impossible de lancer le jeu !");
                                     e.printStackTrace();
                                     gameLaunched = false;
 
                                 }
-                                if(gameLaunched) {
+                                if (gameLaunched) {
                                     Timer timer = new Timer();
                                     timer.schedule(new TimerTask() {
                                         @Override
@@ -139,15 +145,14 @@ public class CraftMoneyGame {
                     @Override
                     public void update(int downloaded, int max) {
                         Platform.runLater(() -> {
-                            if(!downloadingMods) {
+                            if (!downloadingMods) {
 
-                                int updatePercentage = (100* downloaded) / max;
+                                int updatePercentage = (100 * downloaded) / max;
 
                                 controller.getUpdateLabel().setText("Mise à jour en cours (" + updatePercentage + "%)");
                                 controller.getProgressBar().setProgress((double) updatePercentage / 100);
-                            }
-                            else {
-                                int updatePercentage = (100* downloaded) / max;
+                            } else {
+                                int updatePercentage = (100 * downloaded) / max;
 
                                 controller.getUpdateLabel().setText("Téléchargement des mods (" + updatePercentage + "%)");
                                 controller.getProgressBar().setProgress((double) updatePercentage / 100);
@@ -157,8 +162,18 @@ public class CraftMoneyGame {
 
                     }
                 });
-            } catch (IOException e) {
-                e.printStackTrace();
+            } catch (Exception e) {
+
+
+                Platform.runLater(() -> {
+                    ErrorStage error = new ErrorStage(stage, main);
+                    error.getController().setErrorType("Impossible de mettre à jour le jeu !");
+                    CrashLogger crashLogger = new CrashLogger();
+                    crashLogger.createCrashLog(e);
+
+                });
+
+
             }
         });
         thread.start();
@@ -175,27 +190,27 @@ public class CraftMoneyGame {
         } catch (IOException e) {
             e.printStackTrace();
         }
-         controller = loader.getController();
+        controller = loader.getController();
         controller.init();
         stage.getContainer().setCenter(stage.getAnchorPane());
     }
+
     private void launchGame() throws LaunchException {
 
         ExternalLaunchProfile profile = MinecraftLauncher.createExternalProfile(GAME_INFOS, GameFolder.CRAFTMONEY, Authentication.getAccount());
         main.getLauncherSettingsConfig().reloadConfiguration();
-        if(main.getLauncherSettingsConfig().getConfiguration().get("ram") == null) {
+        if (main.getLauncherSettingsConfig().getConfiguration().get("ram") == null) {
             main.getLauncherSettingsConfig().getConfiguration().put("ram", 1);
         }
         main.getLauncherSettingsConfig().saveConfiguration();
         double allocatedRam = Double.parseDouble(main.getLauncherSettingsConfig().getConfiguration().get("ram").toString());
         int allocatedRamInMb = (int) (allocatedRam * 1000);
-        profile.getVmArgs().addAll(Arrays.asList("-Xms1000m", "-Xmx" + allocatedRamInMb+"m"));
+        profile.getVmArgs().addAll(Arrays.asList("-Xms1000m", "-Xmx" + allocatedRamInMb + "m"));
 
         ExternalLauncher launcher = new ExternalLauncher(profile);
 
         Process process = launcher.launch();
         this.gameLaunched = true;
-
 
 
     }
