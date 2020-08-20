@@ -72,7 +72,7 @@ public class CraftMoneyGame {
 
             try {
 
-                craftMoneyUpdater.update( new IProgressCallback() {
+                craftMoneyUpdater.update( CRAFTMONEY_GAME_DIR, new IProgressCallback() {
                     @Override
                     public void init() {
                         Platform.runLater(()-> {
