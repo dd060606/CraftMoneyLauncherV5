@@ -94,6 +94,7 @@ public class CraftMoneyGame {
                         if (step == Step.MODS) {
                             Platform.runLater(() -> {
                                 controller.getUpdateLabel().setText("Installation des Mods . . .");
+                                controller.getProgressBar().setProgress(ProgressBar.INDETERMINATE_PROGRESS);
                                 downloadingMods = true;
                             });
                         }
@@ -113,7 +114,9 @@ public class CraftMoneyGame {
                                 controller.getUpdateLabel().setText("Lancement du jeu . . .");
                                 controller.getProgressBar().setProgress(1);
 
+                                String oldJavaHome = System.getProperty("java.home");
                                 try {
+                                    System.setProperty("java.home", new File(CraftMoneyLauncher.CRAFTMONEY_PROGRAM_DIR, "/jre/").toPath().toString());
                                     launchGame();
                                 } catch (LaunchException e) {
 
@@ -122,7 +125,7 @@ public class CraftMoneyGame {
                                     CrashLogger crashLogger = new CrashLogger();
                                     crashLogger.createCrashLog(e);
 
-
+                                    System.setProperty("java.home", oldJavaHome);
                                     System.out.println("[CraftMoney] : Impossible de lancer le jeu !");
                                     e.printStackTrace();
                                     gameLaunched = false;
@@ -197,6 +200,9 @@ public class CraftMoneyGame {
     }
 
     private void launchGame() throws LaunchException {
+
+
+
 
         ExternalLaunchProfile profile = MinecraftLauncher.createExternalProfile(GAME_INFOS, GameFolder.CRAFTMONEY, Authentication.getAccount());
         main.getLauncherSettingsConfig().reloadConfiguration();
