@@ -44,7 +44,7 @@ public class CraftMoneyUpdater {
             List<Mod> modsList = Mod.getModsFromJson(new URL("http://dd06dev.planethoster.world/download_center/launchers/craftmoney/mods/mods.json"));
             final IVanillaVersion.Builder versionBuilder = new IVanillaVersion.Builder("1.12.2");
             final IVanillaVersion version = versionBuilder.build(false, VersionType.FORGE);
-            final FlowUpdater updater = new FlowUpdater.FlowUpdaterBuilder().withForgeVersion(new NewForgeVersion("1.12.2-14.23.5.2854", version, updateLogger, callback, modsList, true)).withVersion(version).withLogger(updateLogger).withSilentUpdate(true).withProgressCallback(callback).build();
+            final FlowUpdater updater = new FlowUpdater.FlowUpdaterBuilder().withForgeVersion(new NewForgeVersion("14.23.5.2854", version, updateLogger, callback, modsList, true)).withVersion(version).withLogger(updateLogger).withSilentUpdate(true).withProgressCallback(callback).build();
 
             updater.update(dir, false);
         } catch (BuilderArgumentException e) {

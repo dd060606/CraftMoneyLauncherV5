@@ -172,6 +172,7 @@ public class CraftMoneyGame {
                     crashLogger.createCrashLog(e);
 
                 });
+                e.printStackTrace();
 
 
             }
