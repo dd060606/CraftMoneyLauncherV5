@@ -127,7 +127,7 @@ public class CraftMoneyGame {
                                         public void run() {
                                             System.exit(0);
                                         }
-                                    }, 7000);
+                                    }, 8500);
                                 }
 
                             });
@@ -202,7 +202,7 @@ public class CraftMoneyGame {
         double allocatedRam = Double.parseDouble(main.getLauncherSettingsConfig().getConfiguration().get("ram").toString());
         int allocatedRamInMb = (int) (allocatedRam * 1000);
         profile.getVmArgs().addAll(Arrays.asList("-Xms1000m", "-Xmx" + allocatedRamInMb + "m"));
-
+        //profile.getArgs().addAll(Arrays.asList(new String[]{"--server=play.craftmoney.fr", "--port=25565"}));
 
         ExternalLauncher launcher = new ExternalLauncher(profile);
 
