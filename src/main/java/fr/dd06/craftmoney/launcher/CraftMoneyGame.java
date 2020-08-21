@@ -94,6 +94,7 @@ public class CraftMoneyGame {
                         if (step == Step.MODS) {
                             Platform.runLater(() -> {
                                 controller.getUpdateLabel().setText("Installation des Mods . . .");
+                                controller.getProgressBar().setProgress(ProgressBar.INDETERMINATE_PROGRESS);
                                 downloadingMods = true;
                             });
                         }
