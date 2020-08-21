@@ -4,8 +4,7 @@ import fr.dd06.apis.javautils.java.util.file.analyse.FileAnalyzer;
 import fr.dd06.craftmoney.CraftMoneyLauncher;
 import fr.dd06.craftmoney.launcher.CraftMoneyGame;
 import fr.dd06.craftmoney.launcher.LauncherStage;
-import fr.dd06.craftmoney.launcher.errors.ErrorStage;
-import fr.dd06.craftmoney.launcher.home.mods.CraftMoneyOptionalMods;
+
 import fr.flowarg.flowlogger.Logger;
 import fr.flowarg.flowupdater.FlowUpdater;
 import fr.flowarg.flowupdater.utils.BuilderArgumentException;
@@ -14,13 +13,12 @@ import fr.flowarg.flowupdater.versions.NewForgeVersion;
 import fr.flowarg.flowupdater.versions.VersionType;
 import fr.flowarg.flowupdater.versions.download.IProgressCallback;
 import fr.flowarg.flowupdater.versions.download.Mod;
-import javafx.application.Platform;
 
 import java.io.File;
 import java.io.IOException;
 
 import java.net.URL;
-import java.util.ArrayList;
+
 import java.util.List;
 
 public class CraftMoneyUpdater {
@@ -48,15 +46,17 @@ public class CraftMoneyUpdater {
             final FlowUpdater updater = new FlowUpdater.FlowUpdaterBuilder().withForgeVersion(new NewForgeVersion("14.23.5.2854", version, updateLogger, callback, modsList, true)).withVersion(version).withLogger(updateLogger).withSilentUpdate(true).withProgressCallback(callback).build();
 
             updater.update(dir, false);
+
         } catch (BuilderArgumentException e) {
             e.printStackTrace();
         }
 
 
 
+
     }
 
-    private void analyzeMods(File dir) {
+    public static void analyzeMods(File dir) {
         File modsDir = new File(dir, "/mods/");
         modsDir.getParentFile().mkdirs();
         modsDir.mkdirs();

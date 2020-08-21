@@ -4,33 +4,21 @@ import fr.dd06.apis.mclauncher.LaunchException;
 import fr.dd06.apis.mclauncher.external.ExternalLaunchProfile;
 import fr.dd06.apis.mclauncher.external.ExternalLauncher;
 import fr.dd06.apis.mclauncher.minecraft.*;
-import fr.dd06.apis.mclauncher.util.ProcessLogManager;
-import fr.dd06.apis.mclauncher.util.ramselector.RamSelector;
 import fr.dd06.craftmoney.CraftMoneyLauncher;
 import fr.dd06.craftmoney.launcher.auth.Authentication;
 import fr.dd06.craftmoney.launcher.errors.ErrorStage;
 import fr.dd06.craftmoney.launcher.update.CraftMoneyUpdater;
 import fr.dd06.craftmoney.launcher.update.controller.UpdateController;
 import fr.dd06.craftmoney.launcher.utils.CrashLogger;
-import fr.flowarg.flowlogger.Logger;
-import fr.flowarg.flowupdater.FlowUpdater;
-import fr.flowarg.flowupdater.utils.BuilderArgumentException;
-import fr.flowarg.flowupdater.versions.IForgeVersion;
-import fr.flowarg.flowupdater.versions.IVanillaVersion;
-import fr.flowarg.flowupdater.versions.NewForgeVersion;
-import fr.flowarg.flowupdater.versions.VersionType;
 import fr.flowarg.flowupdater.versions.download.IProgressCallback;
-import fr.flowarg.flowupdater.versions.download.Mod;
 import fr.flowarg.flowupdater.versions.download.Step;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ProgressBar;
 
-
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -117,6 +105,7 @@ public class CraftMoneyGame {
                                 String oldJavaHome = System.getProperty("java.home");
                                 try {
                                     System.setProperty("java.home", new File(CraftMoneyLauncher.CRAFTMONEY_PROGRAM_DIR, "/jre/").toPath().toString());
+                                    CraftMoneyUpdater.analyzeMods(CRAFTMONEY_GAME_DIR);
                                     launchGame();
                                 } catch (LaunchException e) {
 
@@ -213,6 +202,7 @@ public class CraftMoneyGame {
         double allocatedRam = Double.parseDouble(main.getLauncherSettingsConfig().getConfiguration().get("ram").toString());
         int allocatedRamInMb = (int) (allocatedRam * 1000);
         profile.getVmArgs().addAll(Arrays.asList("-Xms1000m", "-Xmx" + allocatedRamInMb + "m"));
+
 
         ExternalLauncher launcher = new ExternalLauncher(profile);
 

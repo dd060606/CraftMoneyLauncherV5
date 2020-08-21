@@ -40,7 +40,7 @@ import fr.dd06.apis.mclauncher.LanguageManager;
 /*    */ public final class LogUtil
 /*    */ {
 /*    */   public static void message(boolean err, String... messages) {
-/* 44 */     String message = "[OpenLauncherLib] " + LanguageManager.lang(messages);
+/* 44 */     String message = "[MCLauncher] " + LanguageManager.lang(messages);
 /*    */     
 /* 46 */     if (err) {
 /* 47 */       System.err.println(message);
@@ -55,7 +55,7 @@ import fr.dd06.apis.mclauncher.LanguageManager;
 /*    */ 
 /*    */   
 /*    */   public static void rawInfo(String message) {
-/* 59 */     System.out.println("[OpenLauncherLib] " + message);
+/* 59 */     System.out.println("[MCLauncher] " + message);
 /*    */   }
 /*    */ 
 /*    */ 
@@ -65,7 +65,7 @@ import fr.dd06.apis.mclauncher.LanguageManager;
 /*    */ 
 /*    */   
 /*    */   public static void rawErr(String message) {
-/* 69 */     System.err.println("[OpenLauncherLib] " + message);
+/* 69 */     System.err.println("[MCLauncher] " + message);
 /*    */   }
 /*    */ 
 /*    */ 

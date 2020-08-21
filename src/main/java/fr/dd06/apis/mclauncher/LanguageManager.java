@@ -11,7 +11,7 @@
 /*  11 */   private static HashMap<String, String> currentLangSet = ENGLISH;
 /*     */   
 /*     */   static {
-/*  14 */     ENGLISH.put("hi-ext", "OpenLauncherLib 3.0.4 by Adrien 'Litarvan' Navratil - External Launching System");
+/*  14 */     ENGLISH.put("hi-ext", "Launching with External Launching System");
 /*  15 */     ENGLISH.put("jre-custom", "Java Custom Enabled | by Alwyn974");
 /*  16 */     ENGLISH.put("mineweb-enable", "Mineweb Enabled | by Alwyn974");
 /*  17 */     ENGLISH.put("connect-server", "Automatic connection to the server | by Alwyn974");
@@ -43,7 +43,7 @@
 /*  43 */     ENGLISH.put("done", "Done");
 /*  44 */     ENGLISH.put("ent", "Entire command");
 /*     */     
-/*  46 */     FRENCH.put("hi-ext", "OpenLauncherLib 3.0.4 par Adrien 'Litarvan' Navratil - Systeme de lancement externe");
+/*  46 */     FRENCH.put("hi-ext", "Lancement avec le  systeme de lancement externe");
 /*  47 */     FRENCH.put("jre-custom", "Java Custom Activé | by Alwyn974");
 /*  48 */     FRENCH.put("mineweb-enable", "Mineweb Activé | by Alwyn974");
 /*  49 */     FRENCH.put("connect-server", "Connexion automatique au Serveur | by Alwyn974");

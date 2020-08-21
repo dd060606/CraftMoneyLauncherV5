@@ -93,7 +93,7 @@ import fr.dd06.apis.mclauncher.minecraft.util.GameDirGenerator;
 /*  92 */         if (tweak.equals(GameTweak.FORGE)) {
 /*     */           
 /*  94 */           if (gameVersion.getGameType().equals(GameType.V1_5_2_LOWER)) {
-/*  95 */             System.out.println("[OpenLauncherLib] [WARNING] You selected Forge tweaking with a version under or equals as 1.5.2, forge is supposed to be installed in the jar (not with a tweaker), the game COULD NOT START !");
+/*  95 */             System.out.println("[MCLauncher] [WARNING] You selected Forge tweaking with a version under or equals as 1.5.2, forge is supposed to be installed in the jar (not with a tweaker), the game COULD NOT START !");
 /*     */           }
 /*  97 */           forge = true;
 /*     */         }
@@ -103,11 +103,11 @@ import fr.dd06.apis.mclauncher.minecraft.util.GameDirGenerator;
 /*     */         } 
 /*     */       } 
 /* 104 */       if (tweaks.length > 0 && gameVersion.getGameType().equals(GameType.V1_5_2_LOWER)) {
-/* 105 */         System.out.println("[OpenLauncherLib] [WARNING] You selected tweaking with a version under or equals as 1.5.2, this isn't fully supported, and could cause bugs.");
+/* 105 */         System.out.println("[MCLauncher] [WARNING] You selected tweaking with a version under or equals as 1.5.2, this isn't fully supported, and could cause bugs.");
 /*     */       }
 /* 107 */       if (shaderOrOptifine && forge) {
 /*     */         
-/* 109 */         System.out.println("[OpenLauncherLib] [WARNING] You selected Forge tweak with Optifine/Shader, they are ONLY FOR VANILLA, the game wil probably not start, so for security, Optifine/Shader was/were disabled");
+/* 109 */         System.out.println("[MCLauncher] [WARNING] You selected Forge tweak with Optifine/Shader, they are ONLY FOR VANILLA, the game wil probably not start, so for security, Optifine/Shader was/were disabled");
 /*     */         
 /* 111 */         ArrayList<GameTweak> tweakList = new ArrayList<>();
 /*     */         
