@@ -8,6 +8,7 @@ import fr.dd06.craftmoney.launcher.LauncherStage;
 import fr.flowarg.flowlogger.Logger;
 import fr.flowarg.flowupdater.FlowUpdater;
 import fr.flowarg.flowupdater.utils.BuilderArgumentException;
+import fr.flowarg.flowupdater.utils.UpdaterOptions;
 import fr.flowarg.flowupdater.versions.IVanillaVersion;
 import fr.flowarg.flowupdater.versions.NewForgeVersion;
 import fr.flowarg.flowupdater.versions.VersionType;
@@ -43,7 +44,7 @@ public class CraftMoneyUpdater {
             List<Mod> modsList = Mod.getModsFromJson(new URL("http://dd06dev.planethoster.world/download_center/launchers/craftmoney/mods/mods.json"));
             final IVanillaVersion.Builder versionBuilder = new IVanillaVersion.Builder("1.12.2");
             final IVanillaVersion version = versionBuilder.build(false, VersionType.FORGE);
-            final FlowUpdater updater = new FlowUpdater.FlowUpdaterBuilder().withForgeVersion(new NewForgeVersion("14.23.5.2854", version, updateLogger, callback, modsList, true)).withVersion(version).withLogger(updateLogger).withSilentUpdate(true).withProgressCallback(callback).build();
+            final FlowUpdater updater = new FlowUpdater.FlowUpdaterBuilder().withForgeVersion(new NewForgeVersion("14.23.5.2854", version, updateLogger, callback, modsList, true)).withVersion(version).withLogger(updateLogger).withProgressCallback(callback).withUpdaterOptions(new UpdaterOptions(true,  true, false)).build();
 
             updater.update(dir, false);
 
