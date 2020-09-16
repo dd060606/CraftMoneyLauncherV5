@@ -44,7 +44,7 @@ public class CraftMoneyUpdater {
             VanillaVersion version = new VanillaVersion.VanillaVersionBuilder().withName("1.12.2").withSnapshot(false).withVersionType(VersionType.FORGE).build();
 
 
-            FlowUpdater updater = new FlowUpdater.FlowUpdaterBuilder().withVersion(version).withUpdaterOptions(new UpdaterOptions(true, false)).withProgressCallback(callback).withLogger(updateLogger).withForgeVersion(new NewForgeVersion("14.23.5.2854", version, updateLogger, callback, modsList, false)).build();
+            FlowUpdater updater = new FlowUpdater.FlowUpdaterBuilder().withVersion(version).withUpdaterOptions(new UpdaterOptions(true, false)).withProgressCallback(callback).withLogger(updateLogger).withForgeVersion(new NewForgeVersion("14.23.5.2854", version, updateLogger, callback, modsList, true)).build();
 
 
             updater.update(dir, false);
