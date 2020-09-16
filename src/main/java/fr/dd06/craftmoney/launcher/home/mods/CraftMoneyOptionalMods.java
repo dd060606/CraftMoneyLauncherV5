@@ -1,6 +1,6 @@
 package fr.dd06.craftmoney.launcher.home.mods;
 
-import fr.flowarg.flowupdater.versions.download.Mod;
+
 
 import java.io.File;
 import java.io.IOException;

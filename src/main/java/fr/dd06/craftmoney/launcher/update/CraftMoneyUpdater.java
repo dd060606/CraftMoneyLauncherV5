@@ -4,22 +4,21 @@ import fr.dd06.apis.javautils.java.util.file.analyse.FileAnalyzer;
 import fr.dd06.craftmoney.CraftMoneyLauncher;
 import fr.dd06.craftmoney.launcher.CraftMoneyGame;
 import fr.dd06.craftmoney.launcher.LauncherStage;
-
 import fr.flowarg.flowlogger.Logger;
 import fr.flowarg.flowupdater.FlowUpdater;
-import fr.flowarg.flowupdater.utils.BuilderArgumentException;
+import fr.flowarg.flowupdater.download.IProgressCallback;
+
+import fr.flowarg.flowupdater.download.json.Mod;
 import fr.flowarg.flowupdater.utils.UpdaterOptions;
-import fr.flowarg.flowupdater.versions.IVanillaVersion;
+
+import fr.flowarg.flowupdater.utils.builderapi.BuilderArgumentException;
 import fr.flowarg.flowupdater.versions.NewForgeVersion;
+import fr.flowarg.flowupdater.versions.VanillaVersion;
 import fr.flowarg.flowupdater.versions.VersionType;
-import fr.flowarg.flowupdater.versions.download.IProgressCallback;
-import fr.flowarg.flowupdater.versions.download.Mod;
 
 import java.io.File;
 import java.io.IOException;
-
 import java.net.URL;
-
 import java.util.List;
 
 public class CraftMoneyUpdater {
@@ -42,9 +41,11 @@ public class CraftMoneyUpdater {
         analyzeMods(dir);
         try {
             List<Mod> modsList = Mod.getModsFromJson(new URL("http://dd06dev.planethoster.world/download_center/launchers/craftmoney/mods/mods.json"));
-            final IVanillaVersion.Builder versionBuilder = new IVanillaVersion.Builder("1.12.2");
-            final IVanillaVersion version = versionBuilder.build(false, VersionType.FORGE);
-            final FlowUpdater updater = new FlowUpdater.FlowUpdaterBuilder().withForgeVersion(new NewForgeVersion("14.23.5.2854", version, updateLogger, callback, modsList, true)).withVersion(version).withLogger(updateLogger).withProgressCallback(callback).withUpdaterOptions(new UpdaterOptions(true,  true, false)).build();
+            VanillaVersion version = new VanillaVersion.VanillaVersionBuilder().withName("1.12.2").withSnapshot(false).withVersionType(VersionType.FORGE).build();
+
+
+            FlowUpdater updater = new FlowUpdater.FlowUpdaterBuilder().withVersion(version).withUpdaterOptions(new UpdaterOptions(true, false)).withProgressCallback(callback).withLogger(updateLogger).withForgeVersion(new NewForgeVersion("14.23.5.2854", version, updateLogger, callback, modsList, false)).build();
+
 
             updater.update(dir, false);
 
@@ -67,6 +68,10 @@ public class CraftMoneyUpdater {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public Logger getUpdateLogger() {
+        return updateLogger;
     }
 
 

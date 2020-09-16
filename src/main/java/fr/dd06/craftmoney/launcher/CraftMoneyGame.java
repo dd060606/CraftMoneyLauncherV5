@@ -10,8 +10,11 @@ import fr.dd06.craftmoney.launcher.errors.ErrorStage;
 import fr.dd06.craftmoney.launcher.update.CraftMoneyUpdater;
 import fr.dd06.craftmoney.launcher.update.controller.UpdateController;
 import fr.dd06.craftmoney.launcher.utils.CrashLogger;
-import fr.flowarg.flowupdater.versions.download.IProgressCallback;
-import fr.flowarg.flowupdater.versions.download.Step;
+
+import fr.flowarg.flowlogger.ILogger;
+import fr.flowarg.flowlogger.Logger;
+import fr.flowarg.flowupdater.download.IProgressCallback;
+import fr.flowarg.flowupdater.download.Step;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ProgressBar;
@@ -54,6 +57,7 @@ public class CraftMoneyGame {
     private void update() {
 
         CraftMoneyUpdater craftMoneyUpdater = new CraftMoneyUpdater(stage, main);
+
         Platform.runLater(() -> {
             controller.getUpdateLabel().setText("Recherche de mises à jours . . .");
         });
@@ -62,16 +66,30 @@ public class CraftMoneyGame {
             try {
 
                 craftMoneyUpdater.update(CRAFTMONEY_GAME_DIR, new IProgressCallback() {
+
+
+
                     @Override
-                    public void init() {
+                    public void init(ILogger logger) {
                         Platform.runLater(() -> {
                             controller.getUpdateLabel().setText("Initialisation de la mise à jour . . .");
                         });
-
                     }
 
                     @Override
                     public void step(Step step) {
+                        if (step == Step.DL_ASSETS) {
+                            Platform.runLater(() -> {
+                                controller.getUpdateLabel().setText("Installation des assets . . .");
+
+                            });
+                        }
+                        if (step == Step.DL_LIBS) {
+                            Platform.runLater(() -> {
+                                controller.getUpdateLabel().setText("Installation des libraries . . .");
+
+                            });
+                        }
 
                         if (step == Step.FORGE) {
                             Platform.runLater(() -> {
@@ -98,6 +116,7 @@ public class CraftMoneyGame {
                         }
 
                         if (step == Step.END) {
+                            downloadingMods = false;
                             Platform.runLater(() -> {
                                 controller.getUpdateLabel().setText("Lancement du jeu . . .");
                                 controller.getProgressBar().setProgress(1);
@@ -132,27 +151,32 @@ public class CraftMoneyGame {
 
                             });
                         }
+
                     }
 
                     @Override
                     public void update(int downloaded, int max) {
-                        Platform.runLater(() -> {
-                            if (!downloadingMods) {
 
-                                int updatePercentage = (100 * downloaded) / max;
+                            Platform.runLater(() -> {
+                                if (!downloadingMods) {
 
-                                controller.getUpdateLabel().setText("Mise à jour en cours (" + updatePercentage + "%)");
-                                controller.getProgressBar().setProgress((double) updatePercentage / 100);
-                            } else {
-                                int updatePercentage = (100 * downloaded) / max;
+                                    int updatePercentage = (100 * downloaded) / max;
 
-                                controller.getUpdateLabel().setText("Téléchargement des mods (" + updatePercentage + "%)");
-                                controller.getProgressBar().setProgress((double) updatePercentage / 100);
-                            }
+                                    controller.getUpdateLabel().setText("Mise à jour en cours (" + updatePercentage + "%)");
+                                    controller.getProgressBar().setProgress((double) updatePercentage / 100);
+                                } else {
+                                    int updatePercentage = (100 * downloaded) / max;
 
-                        });
+                                    controller.getUpdateLabel().setText("Téléchargement des mods (" + updatePercentage + "%)");
+                                    controller.getProgressBar().setProgress((double) updatePercentage / 100);
+                                }
+
+                            });
+
 
                     }
+
+
                 });
             } catch (Exception e) {
 
