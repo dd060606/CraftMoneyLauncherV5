@@ -1,5 +1,8 @@
 package fr.dd06.craftmoney;
 
+import club.minnced.discord.rpc.DiscordEventHandlers;
+import club.minnced.discord.rpc.DiscordRPC;
+import club.minnced.discord.rpc.DiscordRichPresence;
 import fr.dd06.apis.javautils.java.configuration.JSONConfiguration;
 import fr.dd06.apis.javautils.java.util.directory.ProgramDir;
 import fr.dd06.craftmoney.launcher.CraftMoneyGame;
@@ -24,8 +27,31 @@ public class CraftMoneyLauncher extends Application {
 
     public static void main(String[] args) {
 
-
+        initRCP();
         launch(args);
+    }
+
+    private static void initRCP() {
+        DiscordRPC lib = DiscordRPC.INSTANCE;
+        String applicationId = "761925817713688576";
+        String steamId = "";
+        DiscordEventHandlers handlers = new DiscordEventHandlers();
+        handlers.ready = (user) -> System.out.println("Ready!");
+        lib.Discord_Initialize(applicationId, handlers, true, steamId);
+        DiscordRichPresence presence = new DiscordRichPresence();
+        presence.startTimestamp = System.currentTimeMillis() / 1000; // epoch second
+        presence.details = "Joue à CraftMoney";
+
+        lib.Discord_UpdatePresence(presence);
+        // in a worker thread
+        new Thread(() -> {
+            while (!Thread.currentThread().isInterrupted()) {
+                lib.Discord_RunCallbacks();
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException ignored) {}
+            }
+        }, "RPC-Callback-Handler").start();
     }
 
     private void initLauncher() {
