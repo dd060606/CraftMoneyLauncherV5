@@ -124,7 +124,7 @@ public class CraftMoneyGame {
                                 String oldJavaHome = System.getProperty("java.home");
                                 try {
                                     System.setProperty("java.home", new File(CraftMoneyLauncher.CRAFTMONEY_PROGRAM_DIR, "/jre/").toPath().toString());
-                                    CraftMoneyUpdater.analyzeMods(CRAFTMONEY_GAME_DIR);
+
                                     launchGame();
                                 } catch (LaunchException e) {
 

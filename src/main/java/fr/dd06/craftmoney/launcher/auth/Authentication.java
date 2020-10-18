@@ -40,13 +40,18 @@ public class Authentication {
 
     }
 
-    public static void authWithCraftMoney(String username, String password) {
+    public static void authWithCraftMoney(String username) {
+        account.connect(AccountType.CRACKED_ACCOUNT, username, "sry", "nope");
 
     }
-
-    public static void authWithCraftMoney(String token) {
-
+    public static void authWithCraftMoney(String username, CraftMoneyLauncher main) {
+        account.connect(AccountType.CRACKED_ACCOUNT, username, "sry", "nope");
+        main.getAccountDataConfig().reloadConfiguration();
+        main.getAccountDataConfig().getConfiguration().put("token", "pseudo:"+username);
+        main.getAccountDataConfig().saveConfiguration();
     }
+
+
 
     public static Account getAccount() {
         return account;

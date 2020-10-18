@@ -38,7 +38,6 @@ public class CraftMoneyUpdater {
 
     public void update(File dir, IProgressCallback callback) throws IOException {
 
-        analyzeMods(dir);
         try {
             List<Mod> modsList = Mod.getModsFromJson(new URL("http://dd06dev.planethoster.world/download_center/launchers/craftmoney/mods/mods.json"));
             VanillaVersion version = new VanillaVersion.VanillaVersionBuilder().withName("1.12.2").withSnapshot(false).withVersionType(VersionType.FORGE).build();

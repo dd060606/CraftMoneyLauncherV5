@@ -4,7 +4,6 @@ import fr.dd06.apis.javautils.javafx.animation.AnimatorFX;
 import fr.dd06.apis.javautils.javafx.util.StageFX;
 import fr.dd06.apis.mcauth.AuthenticationException;
 import fr.dd06.craftmoney.CraftMoneyLauncher;
-
 import fr.dd06.craftmoney.launcher.auth.Authentication;
 import fr.dd06.craftmoney.launcher.auth.controller.AuthController;
 import fr.dd06.craftmoney.launcher.borderpane.controller.BorderPaneController;
@@ -85,7 +84,7 @@ public class LauncherStage {
 
             } else {
 
-                if (!Boolean.parseBoolean(main.getLauncherSettingsConfig().getConfiguration().get("autoAuth").toString())){
+                if (!Boolean.parseBoolean(main.getLauncherSettingsConfig().getConfiguration().get("autoAuth").toString())) {
                     initAuthPane();
                 } else {
                     loader.setLocation(getClass().getClassLoader().getResource("fxml/auth/AutoAuthPaneView.fxml"));
@@ -94,26 +93,51 @@ public class LauncherStage {
                         container.setCenter(anchorPane);
 
                         Thread thread = new Thread(() -> {
-                            try {
+                            if (!main.getAccountDataConfig().getConfiguration().get("token").toString().startsWith("pseudo:")) {
 
-                                Authentication.authWithMojang(main.getAccountDataConfig().getConfiguration().get("token").toString(), main);
-                            } catch (AuthenticationException e) {
 
-                                initAuthPane();
+                                try {
+
+                                    Authentication.authWithMojang(main.getAccountDataConfig().getConfiguration().get("token").toString(), main);
+                                } catch (AuthenticationException e) {
+
+                                    initAuthPane();
+                                    Platform.runLater(() -> {
+                                        container.setCenter(anchorPane);
+                                    });
+
+                                    main.getAccountDataConfig().getConfiguration().put("token", "failed");
+                                    main.getAccountDataConfig().saveConfiguration();
+                                    System.out.println("Invalid token!");
+
+
+                                }
                                 Platform.runLater(() -> {
-                                    container.setCenter(anchorPane);
+                                    if (Authentication.getAccount().getUUID() != null) {
+
+                                        System.out.println("Connecté en tant que " + Authentication.getAccount().getUsername());
+
+                                        FXMLLoader loader3 = new FXMLLoader();
+                                        loader3.setLocation(getClass().getClassLoader().getResource("fxml/launcher/LauncherPaneView.fxml"));
+                                        try {
+                                            anchorPane = (AnchorPane) loader3.load();
+                                        } catch (IOException ioException) {
+                                            ioException.printStackTrace();
+                                        }
+
+                                        LauncherController controller = loader3.getController();
+                                        controller.init(main, this);
+                                        container.setCenter(anchorPane);
+
+                                    }
                                 });
+                            } else {
+                                String username = main.getAccountDataConfig().getConfiguration().get("token").toString().split("pseudo:")[1];
+                                Authentication.authWithCraftMoney(username, main);
+                                Platform.runLater(() -> {
 
-                                main.getAccountDataConfig().getConfiguration().put("token", "failed");
-                                main.getAccountDataConfig().saveConfiguration();
-                                System.out.println("Invalid token!");
 
-
-                            }
-                            Platform.runLater(() -> {
-                                if (Authentication.getAccount().getUUID() != null) {
-
-                                    System.out.println("Connecté en tant que " + Authentication.getAccount().getUsername());
+                                    System.out.println("Connecté en tant que offline : " + Authentication.getAccount().getUsername());
 
                                     FXMLLoader loader3 = new FXMLLoader();
                                     loader3.setLocation(getClass().getClassLoader().getResource("fxml/launcher/LauncherPaneView.fxml"));
@@ -127,10 +151,10 @@ public class LauncherStage {
                                     controller.init(main, this);
                                     container.setCenter(anchorPane);
 
-                                }
-                            });
-
+                                });
+                            }
                         });
+
                         thread.start();
 
 
@@ -142,11 +166,12 @@ public class LauncherStage {
 
 
         } else {
-           initAuthPane();
+            initAuthPane();
         }
 
 
     }
+
     private void initAuthPane() {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getClassLoader().getResource("fxml/auth/AuthPaneView.fxml"));
@@ -168,12 +193,15 @@ public class LauncherStage {
     public Stage getStage() {
         return stage;
     }
+
     public AnchorPane getAnchorPane() {
         return anchorPane;
     }
+
     public void setAnchorPane(AnchorPane pane) {
         this.anchorPane = pane;
     }
+
     public BorderPane getContainer() {
         return container;
     }

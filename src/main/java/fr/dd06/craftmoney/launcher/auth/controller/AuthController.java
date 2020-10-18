@@ -9,14 +9,13 @@ import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-
 
 import java.awt.*;
 import java.io.IOException;
@@ -42,7 +41,12 @@ public class AuthController {
     private Button loginButton;
     @FXML
     private CheckBox rememberMe;
-
+    @FXML
+    private HBox passwordFieldBox;
+    @FXML
+    private Label emailLabel;
+    @FXML
+    private Label passwordLabel;
 
     private boolean mojangAuth = true;
     private CraftMoneyLauncher main;
@@ -55,16 +59,28 @@ public class AuthController {
         authSelectorButton2.setStyle("-fx-border-color: #0C85E7 ;" +
                 "-fx-border-width: 0;" +
                 "-fx-border-radius: 15px;");
+        passwordField.setVisible(true);
+        passwordFieldBox.setVisible(true);
+        passwordLabel.setVisible(true);
+        emailLabel.setText("Adresse E-mail");
+        emailField.setPromptText("Adresse E-mail");
+
         mojangAuth = true;
     }
 
     private void selectCraftMoneyAuth() {
+
         authSelectorButton2.setStyle("-fx-border-color: #0C85E7 ;" +
                 "-fx-border-width: 2;" +
                 "-fx-border-radius: 15px;");
         authSelectorButton.setStyle("-fx-border-color: #0C85E7 ;" +
                 "-fx-border-width: 0;" +
                 "-fx-border-radius: 15px;");
+        passwordField.setVisible(false);
+        passwordFieldBox.setVisible(false);
+        passwordLabel.setVisible(false);
+        emailLabel.setText("Pseudo");
+        emailField.setPromptText("Pseudo");
         mojangAuth = false;
     }
 
@@ -200,10 +216,47 @@ public class AuthController {
         thread.start();
 
 
-
     }
 
     private void authWithCraftMoney() {
-        Authentication.authWithCraftMoney(emailField.getText(), passwordField.getText());
+        Thread thread = new Thread(() -> {
+            Authentication.authWithCraftMoney(emailField.getText());
+            disableFields(true);
+
+            if (rememberMe.isSelected()) {
+                main.getAccountDataConfig().reloadConfiguration();
+                main.getLauncherSettingsConfig().reloadConfiguration();
+                main.getAccountDataConfig().getConfiguration().put("token", "pseudo:"+emailField.getText());
+                main.getLauncherSettingsConfig().getConfiguration().put("autoAuth", true);
+                main.getLauncherSettingsConfig().saveConfiguration();
+                main.getAccountDataConfig().saveConfiguration();
+            } else {
+                main.getAccountDataConfig().reloadConfiguration();
+                if (main.getAccountDataConfig().getConfiguration().get("token") != null) {
+                    main.getAccountDataConfig().getConfiguration().put("token", "failed");
+                    main.getAccountDataConfig().saveConfiguration();
+                }
+            }
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    FXMLLoader loader3 = new FXMLLoader();
+                    loader3.setLocation(getClass().getClassLoader().getResource("fxml/launcher/LauncherPaneView.fxml"));
+                    try {
+                        stage.setAnchorPane((AnchorPane) loader3.load());
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+
+                    LauncherController controller = loader3.getController();
+                    controller.init(main, stage);
+                    stage.getContainer().setCenter(stage.getAnchorPane());
+                }
+            });
+
+
+        });
+        thread.start();
+
     }
 }

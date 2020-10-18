@@ -41,6 +41,7 @@ public class CraftMoneyLauncher extends Application {
         DiscordRichPresence presence = new DiscordRichPresence();
         presence.startTimestamp = System.currentTimeMillis() / 1000; // epoch second
         presence.details = "Joue à CraftMoney";
+        presence.largeImageKey = "icon";
 
         lib.Discord_UpdatePresence(presence);
         // in a worker thread
