@@ -3,6 +3,9 @@ package fr.dd06.craftmoney.launcher;
 import fr.dd06.apis.javautils.javafx.animation.AnimatorFX;
 import fr.dd06.apis.javautils.javafx.util.StageFX;
 import fr.dd06.apis.mcauth.AuthenticationException;
+import fr.dd06.apis.mclauncher.minecraft.auth.AccountType;
+import fr.dd06.apis.minewebauth.auth.mineweb.AuthMineweb;
+import fr.dd06.apis.minewebauth.auth.mineweb.utils.Get;
 import fr.dd06.craftmoney.CraftMoneyLauncher;
 import fr.dd06.craftmoney.launcher.auth.Authentication;
 import fr.dd06.craftmoney.launcher.auth.controller.AuthController;
@@ -93,7 +96,7 @@ public class LauncherStage {
                         container.setCenter(anchorPane);
 
                         Thread thread = new Thread(() -> {
-                            if (!main.getAccountDataConfig().getConfiguration().get("token").toString().startsWith("pseudo:")) {
+                            if (!main.getAccountDataConfig().getConfiguration().get("token").toString().startsWith("mineweb:")) {
 
 
                                 try {
@@ -132,25 +135,41 @@ public class LauncherStage {
                                     }
                                 });
                             } else {
-                                String username = main.getAccountDataConfig().getConfiguration().get("token").toString().split("pseudo:")[1];
-                                Authentication.authWithCraftMoney(username, main);
+
+                                try {
+
+                                    Authentication.authWithCraftMoney(main.getAccountDataConfig().getConfiguration().get("token").toString().split("mineweb:")[1], main);
+                                } catch (Exception e) {
+
+                                    initAuthPane();
+                                    Platform.runLater(() -> {
+                                        container.setCenter(anchorPane);
+                                    });
+
+                                    main.getAccountDataConfig().getConfiguration().put("token", "failed");
+                                    main.getAccountDataConfig().saveConfiguration();
+                                    System.out.println("Invalid token!");
+
+
+                                }
                                 Platform.runLater(() -> {
+                                    if (AuthMineweb.isConnected()) {
+                                        Authentication.getAccount().connect(AccountType.CRACKED_ACCOUNT, Get.getSession.getUsername(), Get.getSession.getUuid(), Get.getSession.getAccessToken(), Get.getSession.getClientToken());
+                                        System.out.println("Connecté en tant que " + Get.getSession.getUsername());
 
+                                        FXMLLoader loader3 = new FXMLLoader();
+                                        loader3.setLocation(getClass().getClassLoader().getResource("fxml/launcher/LauncherPaneView.fxml"));
+                                        try {
+                                            anchorPane = (AnchorPane) loader3.load();
+                                        } catch (IOException ioException) {
+                                            ioException.printStackTrace();
+                                        }
 
-                                    System.out.println("Connecté en tant que offline : " + Authentication.getAccount().getUsername());
+                                        LauncherController controller = loader3.getController();
+                                        controller.init(main, this);
+                                        container.setCenter(anchorPane);
 
-                                    FXMLLoader loader3 = new FXMLLoader();
-                                    loader3.setLocation(getClass().getClassLoader().getResource("fxml/launcher/LauncherPaneView.fxml"));
-                                    try {
-                                        anchorPane = (AnchorPane) loader3.load();
-                                    } catch (IOException ioException) {
-                                        ioException.printStackTrace();
                                     }
-
-                                    LauncherController controller = loader3.getController();
-                                    controller.init(main, this);
-                                    container.setCenter(anchorPane);
-
                                 });
                             }
                         });

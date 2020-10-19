@@ -40,7 +40,7 @@ public class ParseException extends Exception {
 	}
 	
 	/**
-	 * @see org.json.simple.parser.JSONParser#getPosition()
+	 * @see fr.dd06.apis.json.simple.parser.JSONParser#getPosition()
 	 * 
 	 * @return The character position (starting with 0) of the input where the error occurs.
 	 */
@@ -53,11 +53,11 @@ public class ParseException extends Exception {
 	}
 	
 	/**
-	 * @see org.json.simple.parser.Yytoken
+	 * @see fr.dd06.apis.json.simple.parser.Yytoken
 	 * 
 	 * @return One of the following base on the value of errorType:
 	 * 		   	ERROR_UNEXPECTED_CHAR		java.lang.Character
-	 * 			ERROR_UNEXPECTED_TOKEN		org.json.simple.parser.Yytoken
+	 * 			ERROR_UNEXPECTED_TOKEN		fr.dd06.apis.json.simple.parser.Yytoken
 	 * 			ERROR_UNEXPECTED_EXCEPTION	java.lang.Exception
 	 */
 	public Object getUnexpectedObject() {

@@ -1,6 +1,10 @@
 package fr.dd06.craftmoney.launcher.auth.controller;
 
+import fr.dd06.apis.javautils.java.util.crypter.JavaCrypt;
 import fr.dd06.apis.mcauth.AuthenticationException;
+import fr.dd06.apis.mclauncher.minecraft.auth.AccountType;
+import fr.dd06.apis.minewebauth.auth.mineweb.AuthMineweb;
+import fr.dd06.apis.minewebauth.auth.mineweb.utils.Get;
 import fr.dd06.craftmoney.CraftMoneyLauncher;
 import fr.dd06.craftmoney.launcher.LauncherStage;
 import fr.dd06.craftmoney.launcher.auth.Authentication;
@@ -59,9 +63,7 @@ public class AuthController {
         authSelectorButton2.setStyle("-fx-border-color: #0C85E7 ;" +
                 "-fx-border-width: 0;" +
                 "-fx-border-radius: 15px;");
-        passwordField.setVisible(true);
-        passwordFieldBox.setVisible(true);
-        passwordLabel.setVisible(true);
+
         emailLabel.setText("Adresse E-mail");
         emailField.setPromptText("Adresse E-mail");
 
@@ -76,9 +78,7 @@ public class AuthController {
         authSelectorButton.setStyle("-fx-border-color: #0C85E7 ;" +
                 "-fx-border-width: 0;" +
                 "-fx-border-radius: 15px;");
-        passwordField.setVisible(false);
-        passwordFieldBox.setVisible(false);
-        passwordLabel.setVisible(false);
+
         emailLabel.setText("Pseudo");
         emailField.setPromptText("Pseudo");
         mojangAuth = false;
@@ -219,27 +219,47 @@ public class AuthController {
     }
 
     private void authWithCraftMoney() {
-        Thread thread = new Thread(() -> {
-            Authentication.authWithCraftMoney(emailField.getText());
-            disableFields(true);
+        authErrorLabel.setText("");
+        loginButton.setText("Connexion ...");
 
-            if (rememberMe.isSelected()) {
-                main.getAccountDataConfig().reloadConfiguration();
-                main.getLauncherSettingsConfig().reloadConfiguration();
-                main.getAccountDataConfig().getConfiguration().put("token", "pseudo:"+emailField.getText());
-                main.getLauncherSettingsConfig().getConfiguration().put("autoAuth", true);
-                main.getLauncherSettingsConfig().saveConfiguration();
-                main.getAccountDataConfig().saveConfiguration();
-            } else {
-                main.getAccountDataConfig().reloadConfiguration();
-                if (main.getAccountDataConfig().getConfiguration().get("token") != null) {
-                    main.getAccountDataConfig().getConfiguration().put("token", "failed");
-                    main.getAccountDataConfig().saveConfiguration();
-                }
+
+        Thread thread = new Thread(() -> {
+            try {
+
+                Authentication.authWithCraftMoney(emailField.getText(), passwordField.getText());
+            } catch (Exception e) {
+                Platform.runLater(() -> {
+                    authErrorLabel.setText("Connexion impossible : Adresse E-mail ou mot de passe incorrect !");
+                    loginButton.setText("Connexion");
+                });
+
+                Authentication.getAccount().disconnect();
+                disableFields(false);
             }
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
+            Platform.runLater(() -> {
+                if (AuthMineweb.isConnected()) {
+                    disableFields(true);
+                    authErrorLabel.setText("");
+                    loginButton.setText("Connected");
+                    Authentication.getAccount().connect(AccountType.CRACKED_ACCOUNT, Get.getSession.getUsername(), Get.getSession.getUuid(), Get.getSession.getAccessToken(), Get.getSession.getClientToken());
+
+                    if (rememberMe.isSelected()) {
+                        JavaCrypt crypt = new JavaCrypt();
+                        crypt.setCryptKey("fee23FAE3");
+                        main.getAccountDataConfig().reloadConfiguration();
+                        main.getLauncherSettingsConfig().reloadConfiguration();
+                        main.getAccountDataConfig().getConfiguration().put("token", "mineweb:"+emailField.getText() +"," +crypt.encrypt(passwordField.getText()));
+                        main.getLauncherSettingsConfig().getConfiguration().put("autoAuth", true);
+                        main.getLauncherSettingsConfig().saveConfiguration();
+                        main.getAccountDataConfig().saveConfiguration();
+                    } else {
+                        main.getAccountDataConfig().reloadConfiguration();
+                        if (main.getAccountDataConfig().getConfiguration().get("token") != null) {
+                            main.getAccountDataConfig().getConfiguration().put("token", "failed");
+                            main.getAccountDataConfig().saveConfiguration();
+                        }
+                    }
+
                     FXMLLoader loader3 = new FXMLLoader();
                     loader3.setLocation(getClass().getClassLoader().getResource("fxml/launcher/LauncherPaneView.fxml"));
                     try {
@@ -251,12 +271,12 @@ public class AuthController {
                     LauncherController controller = loader3.getController();
                     controller.init(main, stage);
                     stage.getContainer().setCenter(stage.getAnchorPane());
+
                 }
             });
 
-
         });
-        thread.start();
 
+        thread.start();
     }
 }

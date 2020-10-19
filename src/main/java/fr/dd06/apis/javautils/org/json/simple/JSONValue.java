@@ -28,8 +28,8 @@ public class JSONValue {
 	 * 
 
 	 * @return Instance of the following:
-	 *	org.json.simple.JSONObject,
-	 * 	org.json.simple.JSONArray,
+	 *	fr.dd06.apis.json.simple.JSONObject,
+	 * 	fr.dd06.apis.json.simple.JSONArray,
 	 * 	java.lang.String,
 	 * 	java.lang.Number,
 	 * 	java.lang.Boolean,
@@ -55,8 +55,8 @@ public class JSONValue {
 	 * 
 
 	 * @return Instance of the following:
-	 *	org.json.simple.JSONObject,
-	 * 	org.json.simple.JSONArray,
+	 *	fr.dd06.apis.json.simple.JSONObject,
+	 * 	fr.dd06.apis.json.simple.JSONArray,
 	 * 	java.lang.String,
 	 * 	java.lang.Number,
 	 * 	java.lang.Boolean,
@@ -78,8 +78,8 @@ public class JSONValue {
 	 * 
 	 * @param in
 	 * @return Instance of the following:
-	 * 	org.json.simple.JSONObject,
-	 * 	org.json.simple.JSONArray,
+	 * 	fr.dd06.apis.json.simple.JSONObject,
+	 * 	fr.dd06.apis.json.simple.JSONArray,
 	 * 	java.lang.String,
 	 * 	java.lang.Number,
 	 * 	java.lang.Boolean,
