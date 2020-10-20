@@ -13,6 +13,7 @@ import fr.dd06.craftmoney.launcher.utils.CrashLogger;
 
 import fr.flowarg.flowlogger.ILogger;
 import fr.flowarg.flowlogger.Logger;
+import fr.flowarg.flowupdater.FlowUpdater;
 import fr.flowarg.flowupdater.download.IProgressCallback;
 import fr.flowarg.flowupdater.download.Step;
 import javafx.application.Platform;
@@ -218,14 +219,23 @@ public class CraftMoneyGame {
 
 
     private void launchPatchesBeforeUpdate() {
-        File modDIr = new File(CRAFTMONEY_GAME_DIR, "mods/");
-        if (!modDIr.exists()) {
-            modDIr.mkdirs();
+        File libsDir = new File(CRAFTMONEY_GAME_DIR, "libs/");
+        if(libsDir.exists()) {
+            libsDir.delete();
+        }
+        File nativesDir = new File(CRAFTMONEY_GAME_DIR, "natives/");
+        if(nativesDir.exists()) {
+            nativesDir.delete();
+        }
+
+        File modDir = new File(CRAFTMONEY_GAME_DIR, "mods/");
+        if (!modDir.exists()) {
+            modDir.mkdirs();
         }
 
         ArrayList<File> modsToDelete = new ArrayList<>();
-        modsToDelete.add(new File(modDIr, "jei_1.12.2-4.16.1.302.jar"));
-        modsToDelete.add(new File(modDIr, "randompatches-1.12.2-1.22.1.7.jar"));
+        modsToDelete.add(new File(modDir, "jei_1.12.2-4.16.1.302.jar"));
+        modsToDelete.add(new File(modDir, "randompatches-1.12.2-1.22.1.7.jar"));
 
         for(File modToDelete : modsToDelete) {
             if(modToDelete.exists()) {
