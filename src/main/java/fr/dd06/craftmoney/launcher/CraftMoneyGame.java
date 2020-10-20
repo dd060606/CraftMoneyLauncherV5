@@ -21,6 +21,7 @@ import javafx.scene.control.ProgressBar;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -64,7 +65,7 @@ public class CraftMoneyGame {
         Thread thread = new Thread(() -> {
 
             try {
-
+                launchPatchesBeforeUpdate();
                 craftMoneyUpdater.update(CRAFTMONEY_GAME_DIR, new IProgressCallback() {
 
 
@@ -118,6 +119,9 @@ public class CraftMoneyGame {
                         if (step == Step.END) {
                             downloadingMods = false;
                             Platform.runLater(() -> {
+
+                                controller.getUpdateLabel().setText("Installation des patchs ! . . .");
+                                launchPatchesAfterUpdate();
                                 controller.getUpdateLabel().setText("Lancement du jeu . . .");
                                 controller.getProgressBar().setProgress(1);
 
@@ -212,6 +216,26 @@ public class CraftMoneyGame {
         stage.getContainer().setCenter(stage.getAnchorPane());
     }
 
+
+    private void launchPatchesBeforeUpdate() {
+        File modDIr = new File(CRAFTMONEY_GAME_DIR, "mods/");
+        if (!modDIr.exists()) {
+            modDIr.mkdirs();
+        }
+
+        ArrayList<File> modsToDelete = new ArrayList<>();
+        modsToDelete.add(new File(modDIr, "jei_1.12.2-4.16.1.302.jar"));
+        modsToDelete.add(new File(modDIr, "randompatches-1.12.2-1.22.1.7.jar"));
+
+        for(File modToDelete : modsToDelete) {
+            if(modToDelete.exists()) {
+                modToDelete.delete();
+            }
+        }
+    }
+    private void launchPatchesAfterUpdate() {
+
+    }
     private void launchGame() throws LaunchException {
 
 
